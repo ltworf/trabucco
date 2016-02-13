@@ -16,7 +16,7 @@ signals:
 public slots:
     QString getName();
     QString getAction();
-    QString getIcon();
+    virtual QString getIcon();
     virtual void runAction();
 
 protected:

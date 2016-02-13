@@ -3,6 +3,7 @@
 #include <QFileInfo>
 
 #include "desktopaction.h"
+#include "iconfinder.h"
 
 DesktopAction::DesktopAction(QString file, QObject *parent): Action(parent) {
     QSettings settings(file, QSettings::IniFormat);
@@ -14,6 +15,12 @@ DesktopAction::DesktopAction(QString file, QObject *parent): Action(parent) {
 
 void DesktopAction::runAction() {
     printf("%s\n", this->action.toStdString().c_str());
+}
+
+QString DesktopAction::getIcon() {
+    if (!this->cached_icon_path.length())
+        this->cached_icon_path = IconFinder::FindIcon(this->icon);
+    return this->cached_icon_path;
 }
 
 static void iterate_dir(QStack<DesktopAction*> * result, QString dir) {

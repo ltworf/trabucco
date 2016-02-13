@@ -13,8 +13,10 @@ public:
     static QStack<DesktopAction*> LoadDesktopActions();
 public slots:
     virtual void runAction();
+    virtual QString getIcon();
 private:
     bool terminal;
+    QString cached_icon_path;
 };
 
 
