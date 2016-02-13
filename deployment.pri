@@ -11,3 +11,15 @@ unix:!android {
 }
 
 export(INSTALLS)
+
+HEADERS += \
+    $$PWD/action.h \
+    $$PWD/desktopaction.h \
+    $$PWD/tree.h \
+    $$PWD/node.h
+
+SOURCES += \
+    $$PWD/action.cpp \
+    $$PWD/desktopaction.cpp \
+    $$PWD/tree.cpp \
+    $$PWD/node.cpp
