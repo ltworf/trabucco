@@ -1,9 +1,37 @@
 #include <QSettings>
 #include <QDirIterator>
 #include <QFileInfo>
+#include <QProcess>
 
 #include "desktopaction.h"
 #include "iconfinder.h"
+
+/**
+ * @brief DesktopAction::clear_action
+ *
+ * Removes the placeholders for the command line parameters.
+ */
+void DesktopAction::clear_action() {
+    static const char * substitutions[]  = {
+        "%f",
+        "%F",
+        "%u",
+        "%U",
+        "%d",
+        "%D",
+        "%n",
+        "%N",
+        "%i",
+        "%c",
+        "%k",
+        "%v",
+        "%m",
+    };
+
+    for (unsigned int i=0; i< sizeof(substitutions)/sizeof(int*); i++) {
+        this->action = this->action.replace(substitutions[i],"");
+    }
+}
 
 DesktopAction::DesktopAction(QString file, QObject *parent): Action(parent) {
     QSettings settings(file, QSettings::IniFormat);
@@ -11,10 +39,13 @@ DesktopAction::DesktopAction(QString file, QObject *parent): Action(parent) {
     this->icon = settings.value("Desktop Entry/Icon","").toString();
     this->action = settings.value("Desktop Entry/Exec","").toString();
     this->terminal = settings.value("Desktop Entry/Terminal","false").toBool();
+
+    this->clear_action();
 }
 
 void DesktopAction::runAction() {
     printf("%s\n", this->action.toStdString().c_str());
+    QProcess::startDetached(this->action);
 }
 
 QString DesktopAction::getIcon() {

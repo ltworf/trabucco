@@ -16,7 +16,6 @@ void Node::add(Action *action, QString name) {
         return;
     }
 
-
     if (this->hash.contains(name[0])) {
         Node * n = hash[name[0]];
         n->add(action,name.right(name.length() - 1));

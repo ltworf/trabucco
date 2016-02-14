@@ -17,6 +17,8 @@ public slots:
 private:
     bool terminal;
     QString cached_icon_path;
+
+    void clear_action();
 };
 
 
