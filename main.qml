@@ -27,7 +27,6 @@ ApplicationWindow {
     }
     flags: Qt.FramelessWindowHint
     color: "transparent"
-    visible: true
 
     Rectangle
     {
