@@ -3,6 +3,8 @@ TEMPLATE = app
 QT += qml quick widgets gui
 CONFIG += c++11
 
+LIBS        += -lX11
+
 SOURCES += main.cpp
 
 RESOURCES += qml.qrc
