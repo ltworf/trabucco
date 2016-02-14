@@ -8,6 +8,14 @@ ApplicationWindow {
         search.text = ""
         name.text = "Trabucco!"
     }
+    Connections {
+        target: ShortcutX11
+        onActivated: {
+            window.show()
+            window.raise()
+            window.requestActivate()
+        }
+    }
     id: window
     title: "Trabucco!"
     width: Screen.width /6 > 300? Screen.width /6: 300
@@ -97,8 +105,6 @@ ApplicationWindow {
 
             onCursorVisibleChanged: cursorVisible = false
          }
-
-
 
     }
 }
