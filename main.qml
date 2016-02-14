@@ -3,9 +3,14 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 1.3
 
 ApplicationWindow {
-    title: qsTr("Hello World")
-    width: 256
-    height: 256 + 40 + 45
+    function reset() {
+        icon.source = "trabucco.gif"
+        search.text = ""
+        name.text = "Trabucco!"
+    }
+    title: "Trabucco!"
+    width: Screen.width /6 > 300? Screen.width /6: 300
+    height: width + search.height + name.height
     Component.onCompleted: {
         setX(Screen.width / 2 - width / 2);
         setY(Screen.height / 2 - height / 2);
@@ -17,24 +22,27 @@ ApplicationWindow {
     {
         smooth: true
         radius: 15
-        opacity: 0.6
+        opacity: 0.8
         color:"black"
         anchors.fill: parent
 
-        Rectangle {
+        Image {
             id: icon
-            opacity: 0
-            color: "white"
-            width: 256
-            height: 256
-            anchors.top: parent.top
+            opacity: 1
+            source: "trabucco.gif"
+
+            //Make the icon area slightly smaller than the window
+            width: parent.width * 0.95
+            height: parent.width * 0.95
+            x: (parent.width / 2 - width / 2)
+            y: parent.width - width
         }
 
         Text {
            id: name
            anchors.top: icon.bottom
            width: parent.width
-           font.pixelSize: 40
+           font.pointSize: 40
            text: "Trabucco!"
            color: "white"
            horizontalAlignment: Text.AlignHCenter
@@ -42,18 +50,33 @@ ApplicationWindow {
         }
 
         TextInput {
-            id: depth
+            id: search
+            focus: true
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
             anchors.top: name.bottom
-            text: 'AA'
+            text: ''
             color: 'white'
-            font.pixelSize: 35
+            font.pointSize: 35
             onTextChanged: {
-                var a = tree.search(depth.text)
-                console.log(a.getName())
-                name.text = a.getName()
+                if (!search.text.length)
+                    reset()
+
+                var a = tree.search(search.text)
+                var action_name = a.getName()
+                if (action_name)
+                    name.text = action_name
+                var icon_path = a.getIcon()
+                console.log(icon_path)
+                if (icon_path) {
+                    icon.source = 'file://' + icon_path
+                    icon.sourceSize.width = icon.width
+                    icon.sourceSize.height = icon.height
+                } else
+                    icon.source = "trabucco.gif"
             }
+
+            onCursorVisibleChanged: cursorVisible = false
          }
 
 
