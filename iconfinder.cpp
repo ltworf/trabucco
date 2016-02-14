@@ -32,9 +32,9 @@ QString IconFinder::FindIcon(QString icon) {
     };
 
     static const char * formats[]= {
-        ".png",
         ".svg",
         ".svgz",
+        ".png",
     };
 
     for (unsigned int d=0; d< sizeof(dirs)/sizeof(int*); d++) {
