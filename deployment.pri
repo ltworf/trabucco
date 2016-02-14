@@ -16,10 +16,12 @@ HEADERS += \
     $$PWD/action.h \
     $$PWD/desktopaction.h \
     $$PWD/tree.h \
-    $$PWD/node.h
+    $$PWD/node.h \
+    $$PWD/iconfinder.h
 
 SOURCES += \
     $$PWD/action.cpp \
     $$PWD/desktopaction.cpp \
     $$PWD/tree.cpp \
-    $$PWD/node.cpp
+    $$PWD/node.cpp \
+    $$PWD/iconfinder.cpp
