@@ -8,6 +8,7 @@ ApplicationWindow {
         search.text = ""
         name.text = "Trabucco!"
     }
+    id: window
     title: "Trabucco!"
     width: Screen.width /6 > 300? Screen.width /6: 300
     height: width + search.height + name.height
@@ -18,6 +19,7 @@ ApplicationWindow {
     flags: Qt.FramelessWindowHint
     color: "transparent"
     visible: true
+
     Rectangle
     {
         smooth: true
@@ -58,6 +60,22 @@ ApplicationWindow {
             text: ''
             color: 'white'
             font.pointSize: 35
+            Shortcut {
+                sequence: "Esc"
+                onActivated: {
+                    window.setVisible(false)
+                    reset()
+                }
+            }
+
+            onAccepted: {
+                tree.runAction()
+                window.setVisible(false)
+                reset()
+            }
+
+
+
             onTextChanged: {
                 if (!search.text.length)
                     reset()
@@ -70,6 +88,7 @@ ApplicationWindow {
                 console.log(icon_path)
                 if (icon_path) {
                     icon.source = 'file://' + icon_path
+                    //Some magic to make svg images show with the proper resolution
                     icon.sourceSize.width = icon.width
                     icon.sourceSize.height = icon.height
                 } else
