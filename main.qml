@@ -17,6 +17,7 @@ ApplicationWindow {
         }
     }
     id: window
+    visible: false
     title: "Trabucco!"
     width: Screen.width /6 > 300? Screen.width /6: 300
     height: width + search.height + name.height
