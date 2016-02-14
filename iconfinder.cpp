@@ -6,10 +6,10 @@
 
 QString IconFinder::FindIcon(QString icon) {
     static const char * dirs[]= {
-        "/usr/share/icons/breeze-dark/",
-        "/usr/share/icons/breeze/",
         "/usr/share/icons/oxygen/",
         "/usr/share/icons/hicolor/",
+        "/usr/share/icons/breeze/",
+        "/usr/share/icons/breeze-dark/",
     };
 
     static const char * paths[]= {
