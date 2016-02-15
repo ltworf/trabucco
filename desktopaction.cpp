@@ -22,11 +22,12 @@ void DesktopAction::clear_action() {
         "%n",
         "%N",
         "%i",
-        "%c",
         "%k",
         "%v",
         "%m",
     };
+
+    this->action = this->action.replace("%c", this->name);
 
     for (unsigned int i=0; i< sizeof(substitutions)/sizeof(int*); i++) {
         this->action = this->action.replace(substitutions[i],"");
