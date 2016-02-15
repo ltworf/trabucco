@@ -20,7 +20,7 @@ ApplicationWindow {
     visible: false
     title: "Trabucco!"
     width: Screen.width /6 > 300? Screen.width /6: 300
-    height: width + search.height + name.height
+    height: width + name.height
     Component.onCompleted: {
         setX(Screen.width / 2 - width / 2);
         setY(Screen.height / 2 - height / 2);
@@ -49,19 +49,20 @@ ApplicationWindow {
         }
 
         Text {
-           id: name
-           anchors.top: icon.bottom
-           width: parent.width
-           font.pointSize: 40
-           text: "Trabucco!"
-           color: "white"
-           horizontalAlignment: Text.AlignHCenter
-
+            id: name
+            anchors.top: icon.bottom
+            width: parent.width
+            font.pointSize: 40
+            fontSizeMode: Text.HorizontalFit
+            text: "Trabucco!"
+            color: "white"
+            horizontalAlignment: Text.AlignHCenter
         }
 
         TextInput {
             id: search
             focus: true
+            visible: false
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
             anchors.top: name.bottom
