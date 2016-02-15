@@ -1,18 +1,20 @@
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <qqmlcontext.h>
 #include <QtQml>
+#include <QSystemTrayIcon>
 
 #include "tree.h"
 #include "shortcutactivator.h"
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     Tree t;
 
     ShortcutActivator shortcut;
+
 
     shortcut.start();
 
@@ -23,6 +25,12 @@ int main(int argc, char *argv[])
 
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+
+
+    QSystemTrayIcon tray;
+    tray.setIcon(QIcon("qrc:/trabucco.gif"));
+    tray.show();
+    tray.showMessage("Trabucco","Trabucco is running. Press Alt+Space");
 
     return app.exec();
 }
