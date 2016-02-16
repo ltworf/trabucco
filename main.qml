@@ -97,7 +97,9 @@ ApplicationWindow {
                 }
 
                 var a = tree.search(search.text)
-                var action_name = a.getName()
+                var action_name = ''
+                if (a !== null)
+                    action_name = a.getName()
 
                 if (startsWith(action_name.toLowerCase(),text.toLowerCase())) {
                     name.text = '<font color="blue">' + action_name.substr(0,search.text.length) + '</font>'
