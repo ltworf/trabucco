@@ -86,8 +86,10 @@ ApplicationWindow {
 
 
             onTextChanged: {
-                if (!search.text.length)
+                if (!search.text.length) {
                     reset()
+                    return
+                }
 
                 var a = tree.search(search.text)
                 var action_name = a.getName()
