@@ -8,6 +8,11 @@ ApplicationWindow {
         search.text = ""
         name.text = "Trabucco!"
     }
+
+    function startsWith(long_string, header){
+        return long_string.substr(0, header.length) == header
+    }
+
     Connections {
         target: ShortcutX11
         onActivated: {
@@ -93,10 +98,17 @@ ApplicationWindow {
 
                 var a = tree.search(search.text)
                 var action_name = a.getName()
-                if (action_name)
-                    name.text = action_name
+
+                if (startsWith(action_name.toLowerCase(),text.toLowerCase())) {
+                    name.text = '<font color="blue">' + action_name.substr(0,search.text.length) + '</font>'
+                    name.text += action_name.substr(text.length, action_name.length)
+                } else {
+                    name.text = '<font color="blue">' + search.text + '</font>'
+                    icon.source = "trabucco.gif"
+                    return
+                }
+
                 var icon_path = a.getIcon()
-                console.log(icon_path)
                 if (icon_path) {
                     icon.source = 'file://' + icon_path
                     //Some magic to make svg images show with the proper resolution
