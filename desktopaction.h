@@ -9,7 +9,7 @@
 class DesktopAction: public Action
 {
 public:
-    DesktopAction(QString file,QObject * parent=0);
+    DesktopAction(QString file,QObject * parent=NULL);
     static QStack<DesktopAction*> LoadDesktopActions();
 public slots:
     virtual void runAction();

@@ -8,8 +8,8 @@ class Action : public QObject
 {
     Q_OBJECT
 public:
-    explicit Action(QObject * parent=0);
-    explicit Action(QString name, QString action, QString icon, QObject * parent=0);
+    explicit Action(QObject * parent=NULL);
+    explicit Action(QString name, QString action, QString icon, QObject * parent=NULL);
 
 signals:
 
