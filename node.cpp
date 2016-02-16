@@ -35,6 +35,8 @@ Action * Node::_search(QString prefix) {
     if (prefix.length() && hash.contains(prefix[0])) {
         Node * n = hash.value(prefix[0]);
         result = n->search(prefix.right(prefix.length() - 1));
+    } else if (prefix.length()) {
+        result = NULL;
     }
     return result;
 }
