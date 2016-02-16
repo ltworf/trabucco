@@ -16,13 +16,15 @@ void Node::add(Action *action, QString name) {
         return;
     }
 
+    Node * n;
     if (this->hash.contains(name[0])) {
-        Node * n = hash[name[0]];
-        n->add(action,name.right(name.length() - 1));
+        n = hash[name[0]];
     } else {
-        Node * n = new Node(action);
+        n = new Node(action);
         hash.insert(name[0], n);
     }
+
+    n->add(action,name.right(name.length() - 1));
 }
 
 Action * Node::search(QString prefix) {
