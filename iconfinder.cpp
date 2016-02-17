@@ -5,14 +5,15 @@
 
 
 QString IconFinder::FindIcon(QString icon) {
-    static const char * dirs[]= {
+    static const char * dirs[] = {
         "/usr/share/icons/oxygen/",
         "/usr/share/icons/hicolor/",
         "/usr/share/icons/breeze/",
         "/usr/share/icons/breeze-dark/",
+        "/usr/share/pixmaps/",
     };
 
-    static const char * paths[]= {
+    static const char * paths[] = {
         "scalable/apps/",
         "512x512/apps/",
         "apps/512/",
@@ -29,6 +30,7 @@ QString IconFinder::FindIcon(QString icon) {
         "apps/22/",
         "16x16/apps/",
         "apps/16/",
+        "",
     };
 
     static const char * formats[]= {
