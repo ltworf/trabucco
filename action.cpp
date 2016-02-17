@@ -1,8 +1,19 @@
 #include "action.h"
 
-Action::Action(QObject *parent) : QObject(parent) {}
+#include <QQmlEngine>
+
+Action::Action(QObject *parent) : QObject(parent) {
+    QQmlEngine::setObjectOwnership(
+        this,
+        QQmlEngine::CppOwnership
+    );
+}
 
 Action::Action(QString name, QString action, QString icon, QObject *parent): QObject(parent) {
+    QQmlEngine::setObjectOwnership(
+        this,
+        QQmlEngine::CppOwnership
+    );
 
     this->name = name;
     this->action = action;
