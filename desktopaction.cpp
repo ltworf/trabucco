@@ -62,6 +62,11 @@ static void iterate_dir(QStack<DesktopAction*> * result, QString dir) {
 
     while (i.hasNext()) {
         QString path = i.next();
+
+        if (!path.endsWith(".desktop")) {
+            continue;
+        }
+
         QFileInfo info(path);
 
         if (info.isFile() && info.isReadable()) {
