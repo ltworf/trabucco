@@ -78,15 +78,30 @@ static void iterate_dir(QStack<DesktopAction*> * result, QString dir) {
     }
 }
 
+// Following the freedesktop.org specification, we look for applications in the
+// `applications` subdirectory of:
+// $XDG_DATA_HOME (which defaults to `$HOME/.local/share`),
+// and all components of $XDG_DATA_DIRS (a colon-separated list of paths
+// that defaults to `/usr/local/share/:/usr/share/`)
+
+static const QString xdg_data_dirs_default = "/usr/local/share/:/usr/share/";
+
 QStack<DesktopAction*> DesktopAction::LoadDesktopActions() {
     QStack<DesktopAction*> result;
 
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-    if (env.contains("HOME")) {
-        iterate_dir(&result, env.value("HOME") + "/.local/share/applications/");
-    }
 
-    iterate_dir(&result,"/usr/share/applications/");
+    QStringList xdg_data_dirs =
+	    env.value("XDG_DATA_DIRS", xdg_data_dirs_default).split(":");
+
+    // put user's data dir before the system ones
+    xdg_data_dirs.prepend(env.value("XDG_DATA_HOME", QDir::homePath() + "/.local/share/"));
+
+    QStringListIterator i(xdg_data_dirs);
+
+    while (i.hasNext()) {
+	    iterate_dir(&result, i.next() + "/applications");
+    }
 
     return result;
 }
