@@ -31,6 +31,22 @@ QString IconFinder::FindIcon(QString icon) {
         "16x16/apps/",
         "apps/16/",
         "",
+        "scalable/devices/",
+        "512x512/devices/",
+        "devices/512/",
+        "256x256/devices/",
+        "devices/256/",
+        "192x192/devices/",
+        "128x128/devices/",
+        "devices/128/",
+        "64x64/devices/",
+        "devices/64/",
+        "devices/48/",
+        "32x32/devices/",
+        "devices/32/",
+        "devices/22/",
+        "16x16/devices/",
+        "/16/",
     };
 
     static const char * formats[]= {
