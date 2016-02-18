@@ -2,6 +2,7 @@
 #include <QDirIterator>
 #include <QFileInfo>
 #include <QProcess>
+#include <QProcessEnvironment>
 
 #include "desktopaction.h"
 #include "iconfinder.h"
@@ -80,9 +81,12 @@ static void iterate_dir(QStack<DesktopAction*> * result, QString dir) {
 QStack<DesktopAction*> DesktopAction::LoadDesktopActions() {
     QStack<DesktopAction*> result;
 
-    iterate_dir(&result,"/usr/share/applications/");
-    //TODO add local directories
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    if (env.contains("HOME")) {
+        iterate_dir(&result, env.value("HOME") + "/.local/share/applications/");
+    }
 
+    iterate_dir(&result,"/usr/share/applications/");
 
     return result;
 }
