@@ -1,4 +1,7 @@
 #include "node.h"
+
+#include <QHashIterator>
+
 Node::Node() {
     this->action = NULL;
 }
@@ -9,6 +12,14 @@ Node::Node(Action* action) {
 
 void Node::add(Action *action) {
     this->add(action,action->getName().toLower());
+}
+
+Node::~Node() {
+    QHashIterator<QChar, Node*> i(this->hash);
+    while (i.hasNext()) {
+        i.next();
+        delete i.value();
+    }
 }
 
 void Node::add(Action *action, QString name) {
@@ -34,7 +45,6 @@ void Node::add(Action *action, QString name) {
          **/
         this->action = action;
     }
-
 
 }
 

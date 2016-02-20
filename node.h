@@ -12,6 +12,7 @@ class Node
 public:
     Node();
     Node(Action* action);
+    ~Node();
     void add(Action* action);
     Action * search(QString prefix);
 private:
