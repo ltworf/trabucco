@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QFileSystemWatcher>
 
 #include "desktopaction.h"
 #include "action.h"
@@ -14,15 +15,15 @@ class Tree : public QObject
 public:
     explicit Tree(QObject *parent = 0);
 
-signals:
-
 public slots:
     Action * search(QString prefix);
     void runAction();
-
+    void rescan();
 private:
+    bool ready = false;
     Action * last = NULL;
-    Node * node;
+    Node * node = NULL;
+    QFileSystemWatcher watcher;
 };
 
 #endif // TREE_H
