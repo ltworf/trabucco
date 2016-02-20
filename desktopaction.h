@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QStack>
+#include <QStringList>
 
 #include "action.h"
 
@@ -11,6 +12,7 @@ class DesktopAction: public Action
 public:
     DesktopAction(QString file,QObject * parent=NULL);
     static QStack<DesktopAction*> LoadDesktopActions();
+    static QStringList* GetPaths();
 public slots:
     virtual void runAction();
     virtual QString getIcon();

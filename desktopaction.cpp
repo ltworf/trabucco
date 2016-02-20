@@ -86,21 +86,44 @@ static void iterate_dir(QStack<DesktopAction*> * result, QString dir) {
 
 static const QString xdg_data_dirs_default = "/usr/local/share/:/usr/share/";
 
-QStack<DesktopAction*> DesktopAction::LoadDesktopActions() {
-    QStack<DesktopAction*> result;
+/**
+ * @brief DesktopAction::GetPaths
+ * @return the list of paths containing .desktop files
+ */
+QStringList* DesktopAction::GetPaths() {
+    static QStringList* result = NULL;
+    if (result)
+        return result;
 
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 
     QStringList xdg_data_dirs =
-	    env.value("XDG_DATA_DIRS", xdg_data_dirs_default).split(":");
+        env.value("XDG_DATA_DIRS", xdg_data_dirs_default).split(":");
 
     // put user's data dir before the system ones
     xdg_data_dirs.prepend(env.value("XDG_DATA_HOME", QDir::homePath() + "/.local/share/"));
 
+    result = new QStringList();
     QStringListIterator i(xdg_data_dirs);
+    while (i.hasNext()) {
+        result->append(i.next() + "/applications");
+    }
+    result->removeDuplicates();
+
+    return result;
+}
+
+/**
+ * @brief DesktopAction::LoadDesktopActions
+ * @return a stack containing Action for all the .desktop files
+ */
+QStack<DesktopAction*> DesktopAction::LoadDesktopActions() {
+    QStack<DesktopAction*> result;
+
+    QStringListIterator i(*DesktopAction::GetPaths());
 
     while (i.hasNext()) {
-	    iterate_dir(&result, i.next() + "/applications");
+        iterate_dir(&result, i.next());
     }
 
     return result;
