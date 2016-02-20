@@ -24,6 +24,7 @@ private:
     Action * last = NULL;
     Node * node = NULL;
     QFileSystemWatcher watcher;
+    QList<Action*> actions;
 };
 
 #endif // TREE_H

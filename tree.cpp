@@ -18,13 +18,22 @@ Tree::Tree(QObject *parent) : QObject(parent)
 
 void Tree::rescan() {
     this->ready = false;
-    printf("Rescan triggered %d\n",__LINE__);
+
+    printf("Rescan triggered\n");
+
+    QListIterator<Action*> i(this->actions);
+    while (i.hasNext()) {
+        delete i.next();
+    }
+    this->actions.clear();
 
     delete this->node;
     this->node = new Node();
     QStack<DesktopAction*> actions = DesktopAction::LoadDesktopActions();
     while (!actions.isEmpty()) {
-        node->add(actions.pop());
+        Action* a = actions.pop();
+        this->actions.append(a);
+        node->add(a);
     }
 
     this->ready = true;
