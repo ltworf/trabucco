@@ -51,8 +51,10 @@ void DesktopAction::runAction() {
 }
 
 QString DesktopAction::getIcon() {
-    if (!this->cached_icon_path.length())
+    if (!this->cached_icon) {
         this->cached_icon_path = IconFinder::FindIcon(this->icon);
+        this->cached_icon = true;
+    }
     return this->cached_icon_path;
 }
 

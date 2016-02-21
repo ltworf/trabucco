@@ -18,6 +18,7 @@ public slots:
     virtual QString getIcon();
 private:
     bool terminal;
+    bool cached_icon = false;
     QString cached_icon_path;
 
     void clear_action();
