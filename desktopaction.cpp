@@ -47,7 +47,12 @@ DesktopAction::DesktopAction(QString file, QObject *parent): Action(parent) {
 
 void DesktopAction::runAction() {
     printf("%s\n", this->action.toStdString().c_str());
-    QProcess::startDetached(this->action);
+    if (!this->terminal) {
+        QProcess::startDetached(this->action);
+    } else {
+        QProcess::startDetached("x-terminal-emulator -e " + this->action);
+    }
+
 }
 
 QString DesktopAction::getIcon() {
