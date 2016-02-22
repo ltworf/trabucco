@@ -2,13 +2,14 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
+#include <cstdlib>
 
 void ShortcutActivator::end() {
     this->terminate = true;
 }
 
 void ShortcutActivator::run() {
-    Display*    dpy     = XOpenDisplay(0);
+    Display*    dpy     = XOpenDisplay(getenv("DISPLAY"));
     Window      root    = DefaultRootWindow(dpy);
     XEvent      ev;
 
