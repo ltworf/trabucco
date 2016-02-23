@@ -55,6 +55,13 @@ QString IconFinder::FindIcon(QString icon) {
         ".png",
     };
 
+    //Strip format from icon field, if it has one
+    for (unsigned int f=0; f<sizeof(formats)/sizeof(int*); f++) {
+        if (icon.endsWith(formats[f])) {
+            icon = icon.left(icon.length() - strlen(formats[f]));
+        }
+    }
+
     for (unsigned int d=0; d< sizeof(dirs)/sizeof(int*); d++) {
         for (unsigned int p=0; p<sizeof(paths)/sizeof(int*); p++) {
             for (unsigned int f=0; f<sizeof(formats)/sizeof(int*); f++) {
