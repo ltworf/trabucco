@@ -10,22 +10,21 @@ void ShortcutActivator::end() {
 
 void ShortcutActivator::run() {
     Display*    dpy     = XOpenDisplay(getenv("DISPLAY"));
-    Window      root    = DefaultRootWindow(dpy);
+    Window      root_window    = DefaultRootWindow(dpy);
     XEvent      ev;
 
     unsigned int    modifiers       = Mod1Mask; // AnyModifier; // ControlMask | ShiftMask | AnyModifier;
     int             keycode         = XKeysymToKeycode(dpy,XK_space);
-    Window          grab_window     =  root;
     Bool            owner_events    = False;
     int             pointer_mode    = GrabModeAsync;
     int             keyboard_mode   = GrabModeAsync;
 
-    XGrabKey(dpy, keycode, modifiers, grab_window, owner_events, pointer_mode, keyboard_mode);
-    XGrabKey(dpy, keycode, modifiers | Mod2Mask , grab_window, owner_events, pointer_mode, keyboard_mode);
-    XGrabKey(dpy, keycode, modifiers | LockMask, grab_window, owner_events, pointer_mode, keyboard_mode);
-    XGrabKey(dpy, keycode, modifiers | LockMask | Mod2Mask, grab_window, owner_events, pointer_mode, keyboard_mode);
+    XGrabKey(dpy, keycode, modifiers, root_window, owner_events, pointer_mode, keyboard_mode);
+    XGrabKey(dpy, keycode, modifiers | Mod2Mask , root_window, owner_events, pointer_mode, keyboard_mode);
+    XGrabKey(dpy, keycode, modifiers | LockMask, root_window, owner_events, pointer_mode, keyboard_mode);
+    XGrabKey(dpy, keycode, modifiers | LockMask | Mod2Mask, root_window, owner_events, pointer_mode, keyboard_mode);
 
-    XSelectInput(dpy, root, KeyPressMask );
+    XSelectInput(dpy, root_window, KeyPressMask );
     while(true)
     {
         XNextEvent(dpy, &ev);
