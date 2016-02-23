@@ -13,16 +13,38 @@ void ShortcutActivator::run() {
     Window      root_window    = DefaultRootWindow(dpy);
     XEvent      ev;
 
-    unsigned int    modifiers       = Mod1Mask; // AnyModifier; // ControlMask | ShiftMask | AnyModifier;
-    int             keycode         = XKeysymToKeycode(dpy,XK_space);
-    Bool            owner_events    = False;
-    int             pointer_mode    = GrabModeAsync;
-    int             keyboard_mode   = GrabModeAsync;
+    unsigned int modifier = Mod1Mask; // AnyModifier; // ControlMask | ShiftMask | AnyModifier;
+    unsigned int keycode = XKeysymToKeycode(dpy,XK_space);
 
-    XGrabKey(dpy, keycode, modifiers, root_window, owner_events, pointer_mode, keyboard_mode);
-    XGrabKey(dpy, keycode, modifiers | Mod2Mask , root_window, owner_events, pointer_mode, keyboard_mode);
-    XGrabKey(dpy, keycode, modifiers | LockMask, root_window, owner_events, pointer_mode, keyboard_mode);
-    XGrabKey(dpy, keycode, modifiers | LockMask | Mod2Mask, root_window, owner_events, pointer_mode, keyboard_mode);
+    {
+        /*
+         * Caps lock and num lock count as modifiers,
+         * so different masks are needed for all their
+         * statuses.
+         */
+        unsigned int mods[] = {
+            modifier,
+            modifier | Mod2Mask, //Num lock
+            modifier | LockMask, // caps lock
+            modifier | Mod2Mask | LockMask,
+        };
+
+        Bool owner_events = False;
+        int pointer_mode = GrabModeAsync;
+        int keyboard_mode = GrabModeAsync;
+
+        for (int i=0; i<(sizeof(mods)/sizeof(int)); i++) {
+            XGrabKey(
+                dpy,
+                keycode,
+                mods[i],
+                root_window,
+                owner_events,
+                pointer_mode,
+                keyboard_mode
+            );
+        }
+    }
 
     XSelectInput(dpy, root_window, KeyPressMask );
     while(true)
