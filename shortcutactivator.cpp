@@ -55,7 +55,6 @@ void ShortcutActivator::run() {
         }
     }
 
-    XSelectInput(dpy, root_window, KeyPressMask );
     while(true)
     {
         XNextEvent(dpy, &ev);
