@@ -59,13 +59,9 @@ void ShortcutActivator::run() {
     while(true)
     {
         XNextEvent(dpy, &ev);
-        switch(ev.type)
-        {
-            case KeyPress:
-                printf("Key pressed\n");
-                emit this->activated();
-            default:
-                break;
+        if (ev.type == KeyPress) {
+            printf("Key pressed\n");
+            emit this->activated();
         }
 
         if(this->terminate)
