@@ -1,20 +1,29 @@
 #include "shortcutactivator.h"
 
+#include <QSettings>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <cstdlib>
+
+
+ShortcutActivator::ShortcutActivator(QObject *parent) : QThread(parent)
+{
+    QSettings settings;
+
+    this->key = settings.value("Shortcut/keycode",' ').toUInt();
+    this->modifier = settings.value("Shortcut/modifier",Mod1Mask).toUInt();
+}
+
 
 void ShortcutActivator::end() {
     this->terminate = true;
 }
 
 void ShortcutActivator::run() {
-    Display*    dpy     = XOpenDisplay(getenv("DISPLAY"));
-    Window      root_window    = DefaultRootWindow(dpy);
-    XEvent      ev;
-
-    unsigned int modifier = Mod1Mask; // AnyModifier; // ControlMask | ShiftMask | AnyModifier;
-    unsigned int keycode = XKeysymToKeycode(dpy,XK_space);
+    Display* dpy = XOpenDisplay(getenv("DISPLAY"));
+    Window root_window = DefaultRootWindow(dpy);
+    XEvent ev;
+    unsigned int keycode = XKeysymToKeycode(dpy, this->key);
 
     {
         /*
