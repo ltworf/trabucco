@@ -43,8 +43,4 @@ void ShortcutActivator::run() {
     }
 
     XCloseDisplay(dpy);
-    XUngrabKey(dpy,keycode,modifiers,grab_window);
-    XUngrabKey(dpy,keycode,modifiers | Mod2Mask,grab_window);
-    XUngrabKey(dpy,keycode,modifiers| LockMask,grab_window);
-    XUngrabKey(dpy,keycode,modifiers | LockMask | Mod2Mask,grab_window);
 }
