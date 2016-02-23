@@ -33,7 +33,7 @@ void ShortcutActivator::run() {
         int pointer_mode = GrabModeAsync;
         int keyboard_mode = GrabModeAsync;
 
-        for (int i=0; i<(sizeof(mods)/sizeof(int)); i++) {
+        for (unsigned int i=0; i<(sizeof(mods)/sizeof(int)); i++) {
             XGrabKey(
                 dpy,
                 keycode,
