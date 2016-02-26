@@ -12,6 +12,8 @@ public:
 public slots:
     void add(Action* action);
     Action* getAction();
+    BTree* getLeft();
+    BTree* getRight();
 private:
     Action* action = NULL;
     BTree* left = NULL;

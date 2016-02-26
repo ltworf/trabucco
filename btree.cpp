@@ -6,6 +6,14 @@ Action* BTree::getAction() {
     return action;
 }
 
+BTree* BTree::getLeft() {
+    return left;
+}
+
+BTree* BTree::getRight() {
+    return right;
+}
+
 void BTree::add(Action* action) {
     if (!this->action) {
         this->action = action;
@@ -18,7 +26,6 @@ void BTree::add(Action* action) {
         left = new BTree(this);
     else if (!go_left && !right)
         right = new BTree(this);
-
 
     if (go_left)
         left->add(action);
