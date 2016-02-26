@@ -2,6 +2,9 @@
 
 BTree::BTree(QObject *parent) : QObject(parent) {}
 
+Action* BTree::getAction() {
+    return action;
+}
 
 void BTree::add(Action* action) {
     if (!this->action) {

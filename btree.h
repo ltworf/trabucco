@@ -11,6 +11,7 @@ public:
     explicit BTree(QObject * parent=NULL);
 public slots:
     void add(Action* action);
+    Action* getAction();
 private:
     Action* action = NULL;
     BTree* left = NULL;
