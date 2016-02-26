@@ -124,7 +124,7 @@ QStringList* DesktopAction::GetPaths() {
  * @brief DesktopAction::LoadDesktopActions
  * @return a stack containing Action for all the .desktop files
  */
-void DesktopAction::LoadDesktopActions(BTree * tree) {
+void DesktopAction::LoadDesktopActions(BTree* tree) {
 
 
     QStringListIterator i(*DesktopAction::GetPaths());

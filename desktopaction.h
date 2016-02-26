@@ -11,7 +11,7 @@ class DesktopAction: public Action
 {
 public:
     DesktopAction(QString file,QObject * parent=NULL);
-    void LoadDesktopActions(BTree*);
+    static void LoadDesktopActions(BTree*);
     static QStringList* GetPaths();
 public slots:
     virtual void runAction();
