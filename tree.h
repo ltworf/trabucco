@@ -9,8 +9,7 @@
 #include "action.h"
 #include "node.h"
 
-class Tree : public QObject
-{
+class Tree : public QObject {
     Q_OBJECT
 public:
     explicit Tree(QObject *parent = 0);

@@ -2,8 +2,10 @@
 
 #include <QStringListIterator>
 
-Tree::Tree(QObject *parent) : QObject(parent)
-{
+#include "btree.h"
+#include "btreeiterator.h"
+
+Tree::Tree(QObject *parent) : QObject(parent) {
     rescan();
 
     this->watcher.addPaths(*DesktopAction::GetPaths());
@@ -21,19 +23,27 @@ void Tree::rescan() {
 
     printf("Rescan triggered\n");
 
-    QListIterator<Action*> i(this->actions);
-    while (i.hasNext()) {
-        delete i.next();
-    }
-    this->actions.clear();
+    {
+        QListIterator<Action*> i(this->actions);
+        while (i.hasNext()) {
+            delete i.next();
+        }
+        this->actions.clear();
 
-    delete this->node;
-    this->node = new Node();
-    QStack<DesktopAction*> actions = DesktopAction::LoadDesktopActions();
-    while (!actions.isEmpty()) {
-        Action* a = actions.pop();
-        this->actions.append(a);
-        node->add(a);
+        delete this->node;
+    }
+
+    {
+        this->node = new Node();
+        BTree sorted_tree;
+        DesktopAction::LoadDesktopActions(&sorted_tree);
+        BTreeIterator i(&sorted_tree);
+
+        while (i.hasNext()) {
+            Action* a = i.next();
+            this->actions.append(a);
+            node->add(a);
+        }
     }
 
     this->ready = true;
