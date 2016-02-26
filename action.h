@@ -4,8 +4,7 @@
 #include <QObject>
 #include <QString>
 
-class Action : public QObject
-{
+class Action : public QObject {
     Q_OBJECT
 public:
     explicit Action(QObject * parent=NULL);
