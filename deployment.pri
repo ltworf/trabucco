@@ -18,7 +18,8 @@ HEADERS += \
     $$PWD/tree.h \
     $$PWD/node.h \
     $$PWD/iconfinder.h \
-    $$PWD/shortcutactivator.h
+    $$PWD/shortcutactivator.h \
+    $$PWD/btree.h
 
 SOURCES += \
     $$PWD/action.cpp \
@@ -26,4 +27,5 @@ SOURCES += \
     $$PWD/tree.cpp \
     $$PWD/node.cpp \
     $$PWD/iconfinder.cpp \
-    $$PWD/shortcutactivator.cpp
+    $$PWD/shortcutactivator.cpp \
+    $$PWD/btree.cpp
