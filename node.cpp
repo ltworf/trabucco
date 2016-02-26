@@ -34,17 +34,9 @@ void Node::add(Action *action, QString name) {
         n = new Node(action);
         hash.insert(name[0], n);
     }
-
-    if (name.length() > 1) {
-        n->add(action,name.right(name.length() - 1));
-    } else {
-        /*
-         * In this way, things that have a name that is
-         * a prefix of other things, have a way to be
-         * accessed for sure.
-         **/
+    if (!this->action)
         this->action = action;
-    }
+    n->add(action,name.right(name.length() - 1));
 
 }
 
