@@ -2,16 +2,16 @@
 #define DESKTOPACTION_H
 
 #include <QString>
-#include <QStack>
 #include <QStringList>
 
 #include "action.h"
+#include "btree.h"
 
 class DesktopAction: public Action
 {
 public:
     DesktopAction(QString file,QObject * parent=NULL);
-    static QStack<DesktopAction*> LoadDesktopActions();
+    void LoadDesktopActions(BTree*);
     static QStringList* GetPaths();
 public slots:
     virtual void runAction();

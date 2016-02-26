@@ -63,7 +63,7 @@ QString DesktopAction::getIcon() {
     return this->cached_icon_path;
 }
 
-static void iterate_dir(QStack<DesktopAction*> * result, QString dir) {
+static void iterate_dir(BTree* tree, QString dir) {
 
     // Include subdirectories and follow links
     QDirIterator i(dir, QDirIterator::Subdirectories | QDirIterator::FollowSymlinks);
@@ -79,7 +79,7 @@ static void iterate_dir(QStack<DesktopAction*> * result, QString dir) {
 
         if (info.isFile() && info.isReadable()) {
             DesktopAction * action = new DesktopAction(path);
-            result->push(action);
+            tree->add(action);
         }
 
     }
@@ -124,14 +124,12 @@ QStringList* DesktopAction::GetPaths() {
  * @brief DesktopAction::LoadDesktopActions
  * @return a stack containing Action for all the .desktop files
  */
-QStack<DesktopAction*> DesktopAction::LoadDesktopActions() {
-    QStack<DesktopAction*> result;
+void DesktopAction::LoadDesktopActions(BTree * tree) {
+
 
     QStringListIterator i(*DesktopAction::GetPaths());
 
     while (i.hasNext()) {
-        iterate_dir(&result, i.next());
+        iterate_dir(tree, i.next());
     }
-
-    return result;
 }
