@@ -19,14 +19,15 @@ Action* BTreeIterator::next() {
         stack_item item = stack.pop();
         switch (item.state) {
         case LEFT: {
+            item.state = SELF;
+            stack.push(item);
+
             if (item.ptr->getLeft()) {
                 stack_item n;
                 n.ptr = item.ptr->getLeft();
                 n.state = LEFT;
                 stack.push(n);
             }
-            item.state = SELF;
-            stack.push(item);
 
             break;
         }
