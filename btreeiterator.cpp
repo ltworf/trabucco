@@ -1,7 +1,7 @@
 #include "btreeiterator.h"
 
 BTreeIterator::BTreeIterator(BTree *tree, QObject* parent) : QObject(parent) {
-    can_iterate = tree != NULL ? true : false;
+    can_iterate = tree != NULL;
 
     stack_item root;
     root.ptr = tree;
