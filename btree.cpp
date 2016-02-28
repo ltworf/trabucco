@@ -18,6 +18,9 @@ void BTree::add(Action* action) {
     if (!this->action) {
         this->action = action;
         return;
+    } else if (this->action->getName() == action->getName()) {
+        //Avoid duplicates
+        return;
     }
 
     bool go_left = action->getName() < this->action->getName();
