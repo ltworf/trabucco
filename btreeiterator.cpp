@@ -37,9 +37,7 @@ Action* BTreeIterator::next() {
                 n.ptr = item.ptr->getRight();
                 n.state = LEFT;
                 stack.push(n);
-            }
-
-            if (!stack.size())
+            } else if (!stack.size())
                 can_iterate = false;
 
             return item.ptr->getAction();
