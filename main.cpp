@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("tree", &t);
     engine.rootContext()->setContextProperty("ShortcutX11", &shortcut);
-    qmlRegisterType<Action>("random.namespace", 1, 0, "Action");
+    qmlRegisterType<Action>("trabucco.siegesoftware", 1, 0, "Action");
 
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
