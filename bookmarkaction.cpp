@@ -85,8 +85,13 @@ void BookmarkAction::LoadBookmarkActions(BTree* tree) {
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 
     QFileInfo chromium_bookmarks(env.value("HOME") + "/.config/chromium/Default/Bookmarks");
-
     load_from_chromium(tree, chromium_bookmarks);
+
+    QFileInfo opera_bookmarks(env.value("HOME") + "/.config/opera/Bookmarks");
+    load_from_chromium(tree, opera_bookmarks);
+
+    QFileInfo google_chrome(env.value("HOME") + "/.config/google-chrome/Default/Bookmarks");
+    load_from_chromium(tree, google_chrome);
 
 }
 
