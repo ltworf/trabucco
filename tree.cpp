@@ -4,6 +4,7 @@
 
 #include "btree.h"
 #include "btreeiterator.h"
+#include "bookmarkaction.h"
 
 Tree::Tree(QObject *parent) : QObject(parent) {
     rescan();
@@ -37,6 +38,7 @@ void Tree::rescan() {
         this->node = new Node();
         BTree sorted_tree;
         DesktopAction::LoadDesktopActions(&sorted_tree);
+        BookmarkAction::LoadBookmarkActions(&sorted_tree);
         BTreeIterator i(&sorted_tree);
 
         while (i.hasNext()) {
