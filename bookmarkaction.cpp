@@ -162,6 +162,59 @@ static void load_from_firefox(
 }
 
 /**
+ * Load bookmarks from an Opera bookmark list (pre-Blink versions)
+ */
+static void load_from_opera12(
+	BTree* tree, //< [out] action tree to add actions to
+	QString path) //< path to the old Opera bookmark file
+{
+	QFile bookmarks(path);
+	if (!bookmarks.exists())
+		return;
+
+	bookmarks.open(QIODevice::ReadOnly);
+	// file is UTF-8 encoded, and QString reads a QByteArray assuming
+	// that encoding, so we're good
+	QString content(bookmarks.readAll());
+
+	int section_begin = 0;
+	int section_end = 0;
+
+	// delete the Trash folder from the content
+	section_begin = content.indexOf("TRASH FOLDER=YES");
+	section_end = content.indexOf("\n\n-\n\n", section_begin);
+	content.remove(section_begin, section_end - section_begin);
+
+	// bookmarks are stored in sections that begin with #URL and end with double-newlines
+	while ((section_begin = content.indexOf("#URL\n", section_end)) >= 0) {
+		section_end = content.indexOf("\n\n", section_begin);
+		if (section_end < 0)
+			section_end = content.length();
+		QStringRef section(&content, section_begin, section_end - section_begin);
+
+		// skip 'partner' bookmarks
+		if (section.contains("\tPARTNERID="))
+			continue;
+
+		int name_idx = section.indexOf("\tNAME=");
+		int url_idx = section.indexOf("\tURL=");
+		if (name_idx < 0 || url_idx < 0)
+			continue;
+
+		name_idx += 6;
+		url_idx += 5;
+
+		int name_end = section.indexOf("\n", name_idx);
+		int url_end = section.indexOf("\n", url_idx);
+
+		QString name(section.mid(name_idx, name_end - name_idx).toString());
+		QString url(section.mid(url_idx, url_end - url_idx).toString());
+
+		tree->add(new BookmarkAction(name, url, QString()));
+	}
+}
+
+/**
  * @brief BookmarkAction::LoadBookmarkActions
  * @param tree
  *
@@ -185,6 +238,8 @@ void BookmarkAction::LoadBookmarkActions(BTree* tree) {
     QString ff_config_root = env.value("HOME") + "/.mozilla/firefox/";
 
     load_from_firefox(tree, ff_config_root);
+
+    load_from_opera12(tree, env.value("HOME") + "/.opera/bookmarks.adr");
 
 }
 
