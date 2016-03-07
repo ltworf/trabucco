@@ -10,7 +10,8 @@ ShortcutActivator::ShortcutActivator(QObject *parent) : QThread(parent)
 {
     QSettings settings;
 
-    this->key = settings.value("Shortcut/keycode",' ').toUInt();
+    const char* k = settings.value("Shortcut/keycode","space").toString().toStdString().c_str();
+    this->key = XStringToKeysym(k);
     this->modifier = settings.value("Shortcut/modifier",Mod1Mask).toUInt();
 }
 
