@@ -8,8 +8,6 @@
 #include "bookmarkaction.h"
 
 Tree::Tree(QObject *parent) : QObject(parent) {
-    rescan();
-
     this->watcher.addPaths(*DesktopAction::GetPaths());
 
     connect(
@@ -22,6 +20,8 @@ Tree::Tree(QObject *parent) : QObject(parent) {
     QSettings settings;
     this->bookmarks = settings.value("Source/Bookmarks", true).toBool();
     this->desktop = settings.value("Source/Desktop", true).toBool();
+
+    rescan();
 }
 
 void Tree::rescan() {
