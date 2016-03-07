@@ -6,6 +6,7 @@
 
 #include "tree.h"
 #include "shortcutactivator.h"
+#include "settings.h"
 
 int main(int argc, char *argv[])
 {
@@ -33,6 +34,15 @@ int main(int argc, char *argv[])
     tray.setIcon(QIcon("qrc:/trabucco.gif"));
     tray.show();
     tray.showMessage("Trabucco","Trabucco is running. Press Alt+Space", QSystemTrayIcon::Information, 2000);
+
+    Settings settings;
+
+    Settings::connect(
+        &tray,
+        &QSystemTrayIcon::activated,
+        &settings,
+        &Settings::show
+    );
 
     return app.exec();
 }
