@@ -1,6 +1,7 @@
 #include "tree.h"
 
 #include <QStringListIterator>
+#include <QSettings>
 
 #include "btree.h"
 #include "btreeiterator.h"
@@ -17,6 +18,10 @@ Tree::Tree(QObject *parent) : QObject(parent) {
         this,
         &Tree::rescan
     );
+
+    QSettings settings;
+    this->bookmarks = settings.value("Source/Bookmarks", true).toBool();
+    this->desktop = settings.value("Source/Desktop", true).toBool();
 }
 
 void Tree::rescan() {
@@ -37,8 +42,10 @@ void Tree::rescan() {
     {
         this->node = new Node();
         BTree sorted_tree;
-        DesktopAction::LoadDesktopActions(&sorted_tree);
-        BookmarkAction::LoadBookmarkActions(&sorted_tree);
+        if (this->desktop)
+            DesktopAction::LoadDesktopActions(&sorted_tree);
+        if (this->bookmarks)
+            BookmarkAction::LoadBookmarkActions(&sorted_tree);
         BTreeIterator i(&sorted_tree);
 
         while (i.hasNext()) {

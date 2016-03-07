@@ -20,6 +20,8 @@ public slots:
     void rescan();
 private:
     bool ready = false;
+    bool bookmarks;
+    bool desktop;
     Action * last = NULL;
     Node * node = NULL;
     QFileSystemWatcher watcher;
