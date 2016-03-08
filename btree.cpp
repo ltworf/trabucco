@@ -23,7 +23,7 @@ void BTree::add(Action* action) {
         return;
     }
 
-    bool go_left = action->getName().compare(this->action->getName(), Qt::CaseInsensitive);
+    bool go_left = action->getName().compare(this->action->getName(), Qt::CaseInsensitive) < 0;
 
     if (go_left && !left)
         left = new BTree(this);
