@@ -1,17 +1,24 @@
 #include "iconfinder.h"
 
 #include <QFileInfo>
+#include <QIcon>
 
 
 
 QString IconFinder::FindIcon(QString icon) {
-    static const char * dirs[] = {
-        "/usr/share/icons/oxygen/",
-        "/usr/share/icons/hicolor/",
-        "/usr/share/icons/breeze/",
-        "/usr/share/icons/breeze-dark/",
-        "/usr/share/pixmaps/",
-    };
+    static bool init = false;
+    static QStringList dirs;
+    if (!init) {
+        QStringList paths = QIcon::themeSearchPaths();
+        for (int i=0; i<paths.length();i++) {
+            dirs.append(paths.at(i) + "/" + QIcon::themeName() + "/");
+            dirs.append(paths.at(i) + "/hicolor/");
+            dirs.append(paths.at(i) + "/breeze/");
+            dirs.append(paths.at(i) + "/oxygen/");
+        }
+        dirs.append("/usr/share/pixmaps/");
+        init = true;
+    }
 
     static const char * paths[] = {
         "scalable/apps/",
@@ -62,10 +69,10 @@ QString IconFinder::FindIcon(QString icon) {
         }
     }
 
-    for (unsigned int d=0; d< sizeof(dirs)/sizeof(int*); d++) {
+    for (int d=0; d<dirs.length(); d++) {
         for (unsigned int p=0; p<sizeof(paths)/sizeof(int*); p++) {
             for (unsigned int f=0; f<sizeof(formats)/sizeof(int*); f++) {
-                QString attempt = QString(dirs[d]) + QString(paths[p]) + icon + QString(formats[f]);
+                QString attempt = dirs.at(d) + QString(paths[p]) + icon + QString(formats[f]);
                 printf("Attempting %s\n", attempt.toStdString().c_str());
                 QFileInfo i(attempt);
                 if (i.exists() && i.isReadable()) {
