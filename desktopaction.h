@@ -16,7 +16,9 @@ public:
 public slots:
     virtual void runAction();
     virtual QString getIcon();
+    bool mustShow();
 private:
+    bool show;
     bool terminal;
     bool cached_icon = false;
     QString cached_icon_path;

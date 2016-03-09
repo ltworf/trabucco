@@ -43,6 +43,18 @@ DesktopAction::DesktopAction(QString file, QObject *parent): Action(parent) {
     this->terminal = settings.value("Desktop Entry/Terminal","false").toBool();
 
     this->clear_action();
+
+    //Determine wheter to show it
+    if (settings.value("Desktop Entry/NoDisplay","false").toBool()) {
+        this->show = false;
+        return;
+    }
+
+    this->show = true;
+}
+
+bool DesktopAction::mustShow() {
+    return this->show;
 }
 
 void DesktopAction::runAction() {
@@ -79,7 +91,8 @@ static void iterate_dir(BTree* tree, QString dir) {
 
         if (info.isFile() && info.isReadable()) {
             DesktopAction * action = new DesktopAction(path);
-            tree->add(action);
+            if (action->mustShow())
+                tree->add(action);
         }
 
     }
