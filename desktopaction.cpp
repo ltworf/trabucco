@@ -3,6 +3,7 @@
 #include <QFileInfo>
 #include <QProcess>
 #include <QProcessEnvironment>
+#include <QSet>
 
 #include "desktopaction.h"
 #include "iconfinder.h"
@@ -44,13 +45,45 @@ DesktopAction::DesktopAction(QString file, QObject *parent): Action(parent) {
 
     this->clear_action();
 
+    this->show = true;
+
     //Determine wheter to show it
     if (settings.value("Desktop Entry/NoDisplay","false").toBool()) {
         this->show = false;
-        return;
     }
 
-    this->show = true;
+    //Show/hide depending on the DE being used
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+
+    QSet<QString> desktop_environments = QSet<QString>::fromList(
+                env.value("XDG_CURRENT_DESKTOP","").split(":")
+    );
+    QSet<QString> not_show = QSet<QString>::fromList(
+                settings.value("Desktop Entry/NotShowIn","").toString().split(":")
+    );
+    QSet<QString> show_in = QSet<QString>::fromList(
+                settings.value("Desktop Entry/OnlyShowIn","").toString().split(":")
+    );
+
+    desktop_environments.remove("");
+    not_show.remove("");
+    show_in.remove("");
+
+    int show_in_c = show_in.size();
+
+    if (not_show.size()) {
+        not_show.intersect(desktop_environments);
+        if (not_show.size() != 0) {
+            this->show = false;
+        }
+    }
+
+    if (show_in_c) {
+        show_in.subtract(desktop_environments);
+        if (show_in_c == show_in.size()) {
+            this->show = false;
+        }
+    }
 }
 
 bool DesktopAction::mustShow() {
