@@ -84,6 +84,10 @@ DesktopAction::DesktopAction(QString file, QObject *parent): Action(parent) {
             this->show = false;
         }
     }
+
+    if (settings.value("Desktop Entry/Hidden", "false").toBool()) {
+        this->show = false;
+    }
 }
 
 bool DesktopAction::mustShow() {
