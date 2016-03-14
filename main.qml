@@ -7,6 +7,7 @@ ApplicationWindow {
         icon.source = "trabucco.gif"
         search.text = ""
         name.text = "Trabucco!"
+        cornerIcon.visible = false
     }
 
     function startsWith(long_string, header){
@@ -51,6 +52,16 @@ ApplicationWindow {
             height: parent.width * 0.95
             x: (parent.width / 2 - width / 2)
             y: parent.width - width
+
+            Image {
+                id: cornerIcon
+                visible: false
+                opacity: 1
+                width: parent.width / 4
+                height: parent.height / 4
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+            }
         }
 
         Text {
@@ -118,6 +129,14 @@ ApplicationWindow {
                     icon.sourceSize.height = icon.height
                 } else
                     icon.source = "trabucco.gif"
+                if (a.hasCornerIcon() && a.getCornerIcon()) {
+                    cornerIcon.visible = true
+                    cornerIcon.source = 'file://' + a.getCornerIcon()
+                    cornerIcon.sourceSize.width = cornerIcon.width
+                    cornerIcon.sourceSize.height = cornerIcon.height
+                } else {
+                    cornerIcon.visible = false
+                }
             }
 
             onCursorVisibleChanged: cursorVisible = false
