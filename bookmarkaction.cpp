@@ -13,6 +13,7 @@
 #include <QStandardPaths>
 
 #include "downloader.h"
+#include "iconfinder.h"
 
 /**
  * @brief load_from_chromium
@@ -296,6 +297,10 @@ void BookmarkAction::download_icon(QUrl url, QString icon, QString destination) 
 
 }
 
+bool BookmarkAction::hasCornerIcon() {
+    return true;
+}
+
 BookmarkAction::BookmarkAction(QString name, QUrl url, QString icon, QObject* parent): Action(parent) {
     this->name = name;
     this->url = url;
@@ -312,6 +317,11 @@ void BookmarkAction::runAction() {
 }
 
 QString BookmarkAction::getIcon() {
+    static QString browser = IconFinder::FindIcon("internet-web-browser");
+    return browser;
+}
+
+QString BookmarkAction::getCornerIcon() {
     QFileInfo cached_icon(this->icon);
 
     //If the downloader managed to get an icon return it

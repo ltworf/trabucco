@@ -16,6 +16,8 @@ public:
 public slots:
     virtual void runAction();
     virtual QString getIcon();
+    virtual bool hasCornerIcon();
+    virtual QString getCornerIcon();
 private:
     QUrl url;
     void download_icon(QUrl url, QString icon, QString destination);
