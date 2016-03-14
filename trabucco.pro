@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets gui sql
+QT += qml quick widgets gui sql network
 CONFIG += c++11
 
 LIBS        += -lX11
