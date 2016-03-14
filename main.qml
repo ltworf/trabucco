@@ -112,7 +112,7 @@ ApplicationWindow {
 
                 var icon_path = a.getIcon()
                 if (icon_path) {
-                    icon.source = icon_path
+                    icon.source = 'file://' + icon_path
                     //Some magic to make svg images show with the proper resolution
                     icon.sourceSize.width = icon.width
                     icon.sourceSize.height = icon.height

@@ -77,7 +77,7 @@ QString IconFinder::FindIcon(QString icon) {
                 QFileInfo i(attempt);
                 if (i.exists() && i.isReadable()) {
                     printf("Succeeded\n");
-                    return "file://" + attempt;
+                    return attempt;
                 }
             }
         }
