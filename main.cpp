@@ -4,6 +4,7 @@
 #include <QtQml>
 #include <QSystemTrayIcon>
 
+#include "cache.h"
 #include "tree.h"
 #include "shortcutactivator.h"
 #include "settings.h"
@@ -13,6 +14,8 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     app.setApplicationName("Trabucco");
     app.setOrganizationDomain("SiegeSoftware");
+
+    Cache::create_cache_dir();
 
     Tree t;
 

@@ -21,7 +21,8 @@ HEADERS += \
     $$PWD/shortcutactivator.h \
     $$PWD/btree.h \
     $$PWD/btreeiterator.h \
-    $$PWD/bookmarkaction.h
+    $$PWD/bookmarkaction.h \
+    $$PWD/cache.h
 
 SOURCES += \
     $$PWD/action.cpp \
@@ -32,4 +33,5 @@ SOURCES += \
     $$PWD/shortcutactivator.cpp \
     $$PWD/btree.cpp \
     $$PWD/btreeiterator.cpp \
-    $$PWD/bookmarkaction.cpp
+    $$PWD/bookmarkaction.cpp \
+    $$PWD/cache.cpp
