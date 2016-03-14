@@ -29,5 +29,11 @@ QString Action::getAction() {
 QString Action::getIcon() {
     return this->icon;
 }
+QString Action::getCornerIcon() {
+    return "";
+}
+bool Action::hasCornerIcon() {
+    return false;
+}
 
 void Action::runAction() {}
