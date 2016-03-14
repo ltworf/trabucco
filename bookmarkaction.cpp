@@ -312,5 +312,12 @@ void BookmarkAction::runAction() {
 }
 
 QString BookmarkAction::getIcon() {
+    QFileInfo cached_icon(this->icon);
+
+    //If the downloader managed to get an icon return it
+    if (cached_icon.size() != 0)
+        return this->icon;
+
+    //Return the default icon
     return "";
 }
