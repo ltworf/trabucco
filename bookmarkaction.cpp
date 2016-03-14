@@ -9,6 +9,10 @@
 #include <QFileInfo>
 #include <QtSql/QtSql>
 #include <QSettings>
+#include <QCryptographicHash>
+#include <QStandardPaths>
+
+#include "downloader.h"
 
 /**
  * @brief load_from_chromium
@@ -90,7 +94,7 @@ static void load_from_firefox_places(
 
 	db.setDatabaseName(dbfile);
 	if (!db.open()) {
-		qDebug() << "Failed to open Firefox bookmarks @ " << dbfile << "\n";
+        qDebug() << "Failed to open Firefox bookmarks @ " << dbfile << "\n";
 	}
 
 	qDebug() << "Loading Firefox bookmarks @ " << dbfile << "\n";
@@ -247,9 +251,60 @@ QStringList* BookmarkAction::GetPaths() {
     return NULL;
 }
 
+/**
+ * @brief cached_icon
+ * @param favicon
+ * @return
+ */
+static QString cached_icon(QUrl url) {
+    url.setPath("/favicon.ico");
+    url.setQuery("");
+
+    QByteArray hash = QCryptographicHash::hash(
+        url.toString().toLatin1(),
+        QCryptographicHash::Md5
+    );
+
+    QString cache_dir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+
+    return cache_dir + "/" + hash.toHex();
+}
+
+void BookmarkAction::download_icon(QUrl url, QString icon, QString destination) {
+    url.setQuery("");
+
+    //Create empty destination file
+    QFile cache(destination);
+    cache.open(QIODevice::WriteOnly);
+    cache.close();
+
+    QStringList icons;
+
+    //The icon indicated in the bookmark
+    if (icon.size() != 0 && ! icon.startsWith("blob:")) {
+        icons.append(icon);
+    }
+
+    url.setPath("//apple-touch-icon.png");
+    icons.append(url.toString());
+
+    url.setPath("/favicon.ico");
+    icons.append(url.toString());
+
+    //Setting this as parent to free the memory of it
+    new Downloader(icons, destination, this);
+
+}
+
 BookmarkAction::BookmarkAction(QString name, QUrl url, QString icon, QObject* parent): Action(parent) {
     this->name = name;
     this->url = url;
+    this->icon = cached_icon(url);
+
+    QFileInfo cached_icon(this->icon);
+    if (!cached_icon.exists()) {
+        download_icon(url, icon, this->icon);
+    }
 }
 
 void BookmarkAction::runAction() {
