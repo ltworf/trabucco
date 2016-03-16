@@ -38,6 +38,7 @@ void DesktopAction::clear_action() {
 
 DesktopAction::DesktopAction(QString file, QObject *parent): Action(parent) {
     QSettings settings(file, QSettings::IniFormat);
+    settings.setIniCodec("UTF-8");
     this->name = settings.value("Desktop Entry/Name","").toString();
     this->icon = settings.value("Desktop Entry/Icon","").toString();
     this->action = settings.value("Desktop Entry/Exec","").toString();
