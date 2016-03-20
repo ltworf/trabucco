@@ -118,6 +118,7 @@ ApplicationWindow {
                 } else {
                     name.text = '<font color="blue">' + search.text + '</font>'
                     icon.source = "trabucco.gif"
+                    cornerIcon.visible = false
                     return
                 }
 
