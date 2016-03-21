@@ -43,11 +43,6 @@ Action* BTreeIterator::next() {
             return item.ptr->getAction();
             break;
         }
-        case RIGHT: {
-            break;
-        }
-
-
         }
     }
 

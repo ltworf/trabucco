@@ -8,7 +8,6 @@
 typedef enum {
     LEFT,
     SELF,
-    RIGHT,
 } iter_state;
 
 typedef struct {
