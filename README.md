@@ -3,7 +3,7 @@ Trabucco
 
 This is a launcher for people that are nostalgic about katapult.
 
-[Screenshot](http://i.imgur.com/sh166aS.jpg)
+![Screenshot](http://i.imgur.com/sh166aS.jpg)
 
 It is licensed under GPLv3.
 
