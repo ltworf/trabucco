@@ -46,6 +46,8 @@ static void iterate_dir(BTree* tree, QString dir) {
             SearchAction * action = new SearchAction(path);
             if (action->mustShow())
                 tree->add(action);
+            else
+                delete action;
         }
 
     }

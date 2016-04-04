@@ -131,6 +131,8 @@ static void iterate_dir(BTree* tree, QString dir) {
             DesktopAction * action = new DesktopAction(path);
             if (action->mustShow())
                 tree->add(action);
+            else
+                delete action;
         }
 
     }
