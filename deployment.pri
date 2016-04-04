@@ -23,7 +23,8 @@ HEADERS += \
     $$PWD/btreeiterator.h \
     $$PWD/bookmarkaction.h \
     $$PWD/cache.h \
-    $$PWD/downloader.h
+    $$PWD/downloader.h \
+    $$PWD/searchaction.h
 
 SOURCES += \
     $$PWD/action.cpp \
@@ -36,4 +37,5 @@ SOURCES += \
     $$PWD/btreeiterator.cpp \
     $$PWD/bookmarkaction.cpp \
     $$PWD/cache.cpp \
-    $$PWD/downloader.cpp
+    $$PWD/downloader.cpp \
+    $$PWD/searchaction.cpp
