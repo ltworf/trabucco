@@ -36,4 +36,8 @@ bool Action::hasCornerIcon() {
     return false;
 }
 
+bool Action::isPrefix() {
+    return false;
+}
+
 void Action::runAction() {}
