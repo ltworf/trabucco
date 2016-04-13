@@ -29,7 +29,7 @@ QList<SearchAction*> SearchAction::LoadFile(QString file, QObject* parent) {
 
     QString query = settings.value("Desktop Entry/Query","").toString();
     bool hidden = settings.value("Desktop Entry/Hidden","").toBool();
-    QStringList keys = settings.value("Desktop Entry/Keys","").toString().split(",");
+    QStringList keys = settings.value("Desktop Entry/Keys","").toStringList();
 
     for (int i = 0; i < keys.size(); i++) {
         SearchAction* action = new SearchAction(keys.at(i), query, hidden, parent);
