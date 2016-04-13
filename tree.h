@@ -22,6 +22,7 @@ private:
     bool ready = false;
     bool bookmarks;
     bool desktop;
+    bool searchprovider;
     Action * last = NULL;
     Node * node = NULL;
     QFileSystemWatcher watcher;

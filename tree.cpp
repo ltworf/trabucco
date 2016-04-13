@@ -6,6 +6,7 @@
 #include "btree.h"
 #include "btreeiterator.h"
 #include "bookmarkaction.h"
+#include "searchaction.h"
 
 Tree::Tree(QObject *parent) : QObject(parent) {
     this->watcher.addPaths(*DesktopAction::GetPaths());
@@ -20,6 +21,7 @@ Tree::Tree(QObject *parent) : QObject(parent) {
     QSettings settings;
     this->bookmarks = settings.value("Source/Bookmarks", true).toBool();
     this->desktop = settings.value("Source/Desktop", true).toBool();
+    this->searchprovider = settings.value("Source/SearchProvider", true).toBool();
 
     rescan();
 }
@@ -46,6 +48,8 @@ void Tree::rescan() {
             DesktopAction::LoadDesktopActions(&sorted_tree);
         if (this->bookmarks)
             BookmarkAction::LoadBookmarkActions(&sorted_tree);
+        if (this->searchprovider)
+            SearchAction::LoadSearchActions(&sorted_tree);
         BTreeIterator i(&sorted_tree);
 
         while (i.hasNext()) {
