@@ -109,12 +109,18 @@ ApplicationWindow {
 
                 var a = tree.search(search.text)
                 var action_name = ''
-                if (a !== null)
+                var is_prefix = false
+                if (a !== null) {
                     action_name = a.getName()
+                    is_prefix = a.isPrefix()
+                }
+
 
                 if (startsWith(action_name.toLowerCase(),text.toLowerCase())) {
                     name.text = '<font color="blue">' + action_name.substr(0,search.text.length) + '</font>'
                     name.text += action_name.substr(text.length, action_name.length)
+                } else if (is_prefix) {
+                    name.text = '<font color="blue">' + search.text + '</font>'
                 } else {
                     name.text = '<font color="blue">' + search.text + '</font>'
                     icon.source = "trabucco.gif"
