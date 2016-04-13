@@ -73,10 +73,8 @@ QString IconFinder::FindIcon(QString icon) {
         for (unsigned int p=0; p<sizeof(paths)/sizeof(int*); p++) {
             for (unsigned int f=0; f<sizeof(formats)/sizeof(int*); f++) {
                 QString attempt = dirs.at(d) + QString(paths[p]) + icon + QString(formats[f]);
-                printf("Attempting %s\n", attempt.toStdString().c_str());
                 QFileInfo i(attempt);
                 if (i.exists() && i.isReadable()) {
-                    printf("Succeeded\n");
                     return attempt;
                 }
             }
