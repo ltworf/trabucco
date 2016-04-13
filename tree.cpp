@@ -9,7 +9,10 @@
 #include "searchaction.h"
 
 Tree::Tree(QObject *parent) : QObject(parent) {
-    this->watcher.addPaths(*DesktopAction::GetPaths());
+    if(this->desktop)
+        this->watcher.addPaths(*DesktopAction::GetPaths());
+    if(this->searchprovider)
+        this->watcher.addPaths(*SearchAction::GetPaths());
 
     connect(
         &this->watcher,
