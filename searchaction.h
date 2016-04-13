@@ -3,13 +3,14 @@
 
 #include <QString>
 #include <QStringList>
+#include <QList>
 
 #include "action.h"
 #include "btree.h"
 
 class SearchAction: public Action {
 public:
-    SearchAction(QString file,QObject * parent=NULL);
+    static QList<SearchAction*> LoadFile(QString file, QObject* parent=NULL);
     static void LoadSearchActions(BTree*);
     static QStringList* GetPaths();
     bool mustShow();
@@ -17,7 +18,10 @@ public slots:
     virtual bool isPrefix();
     virtual QString getIcon();
 private:
-
+    SearchAction(QString name, QString query, bool hidden, QObject* parent=NULL);
+    QString query;
+    QString hidden;
+    bool show;
 };
 
 #endif // SEARCHACTION_H
