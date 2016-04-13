@@ -31,11 +31,13 @@ void Node::add(Action *action, QString name) {
     if (this->hash.contains(name[0])) {
         n = hash[name[0]];
     } else {
-        n = new Node(action);
+        n = new Node(action->isPrefix() && name.size()!=1? NULL:action);
         hash.insert(name[0], n);
     }
-    if (!this->action)
+
+    if (!this->action && !action->isPrefix())
         this->action = action;
+
     n->add(action,name.right(name.length() - 1));
 
 }
