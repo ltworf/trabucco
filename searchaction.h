@@ -18,6 +18,8 @@ public slots:
     virtual bool isPrefix();
     virtual QString getIcon();
     virtual void runAction(QString);
+    virtual bool hasCornerIcon();
+    virtual QString getCornerIcon();
 private:
     SearchAction(QString name, QString query, bool hidden, QObject* parent=NULL);
     QString query;

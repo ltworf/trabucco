@@ -20,7 +20,6 @@ public slots:
     virtual QString getCornerIcon();
 private:
     QUrl url;
-    void download_icon(QUrl url, QString icon, QString destination);
 };
 
 #endif // BOOKMARKACTION_H

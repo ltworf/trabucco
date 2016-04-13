@@ -7,6 +7,14 @@
 #include <QSettings>
 #include <QUrl>
 
+#include "cache.h"
+#include "iconfinder.h"
+
+static QString get_url(QString action, QString query) {
+    action.replace("\\{@}", QUrl::toPercentEncoding(query));
+    return action;
+}
+
 SearchAction::SearchAction(QString name, QString query, bool hidden, QObject *parent): Action(parent) {
     this->name = name + ":";
     this->action = query;
@@ -15,6 +23,15 @@ SearchAction::SearchAction(QString name, QString query, bool hidden, QObject *pa
     //Hide invalid entries
     if (!name.size() || !query.size())
         this->show = false;
+    if (this->show == false)
+        return;
+
+
+    QUrl url = get_url(this->action, "");
+    this->icon = Cache::cached_icon(url);
+    QFileInfo cached_icon(this->icon);
+    if (!cached_icon.exists())
+        Cache::download_favicon(url, this->icon, this);
 }
 
 QList<SearchAction*> SearchAction::LoadFile(QString file, QObject* parent) {
@@ -106,18 +123,30 @@ void SearchAction::LoadSearchActions(BTree* tree) {
     }
 }
 
-
 bool SearchAction::isPrefix() {
     return true;
 }
-QString SearchAction::getIcon() {
+
+bool SearchAction::hasCornerIcon() {
+    return true;
+}
+
+QString SearchAction::getCornerIcon() {
+    QFileInfo cached_icon(this->icon);
+
+    //If the downloader managed to get an icon return it
+    if (cached_icon.size() != 0)
+        return this->icon;
+
+    //Return the default icon
     return "";
 }
 
-void SearchAction::runAction(QString query) {
-    QString url = this->action;
-    QByteArray encoded = QUrl::toPercentEncoding(query);
-    url.replace("\\{@}", encoded);
+QString SearchAction::getIcon() {
+    static QString browser = IconFinder::FindIcon("internet-web-browser");
+    return browser;
+}
 
-    QDesktopServices::openUrl(url);
+void SearchAction::runAction(QString query) {
+    QDesktopServices::openUrl(get_url(this->action, query));
 }
