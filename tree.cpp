@@ -66,7 +66,12 @@ void Tree::rescan() {
 }
 
 void Tree::runAction() {
-    if (this->last != NULL && this->ready)
+    if (this->last == NULL || !this->ready)
+        return;
+    if (last->isPrefix()) {
+        QString query = this->last_prefix.mid(last->getName().size());
+        last->runAction(query);
+    } else
         last->runAction();
 }
 
@@ -74,5 +79,6 @@ Action * Tree::search(QString prefix) {
     if (!this->ready)
         return NULL;
     printf("Searching %s\n", prefix.toStdString().c_str());
+    this->last_prefix = prefix;
     return this->last = this->node->search(prefix);
 }

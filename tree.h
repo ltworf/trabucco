@@ -24,6 +24,7 @@ private:
     bool desktop;
     bool searchprovider;
     Action * last = NULL;
+    QString last_prefix;
     Node * node = NULL;
     QFileSystemWatcher watcher;
     QList<Action*> actions;
