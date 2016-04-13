@@ -48,6 +48,8 @@ Action * Node::search(QString prefix) {
 
 Action * Node::_search(QString prefix) {
     Action * result = this->action;
+    if (result && result->isPrefix() && prefix.length())
+        return result;
 
     if (prefix.length() && hash.contains(prefix[0])) {
         Node * n = hash.value(prefix[0]);
