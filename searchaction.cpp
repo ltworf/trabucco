@@ -6,9 +6,13 @@
 #include <QSettings>
 
 SearchAction::SearchAction(QString name, QString query, bool hidden, QObject *parent): Action(parent) {
-    this->name = name;
+    this->name = name + ":";
     this->action = query;
     this->show = ! hidden;
+
+    //Hide invalid entries
+    if (!name.size() || !query.size())
+        this->show = false;
 }
 
 QList<SearchAction*> SearchAction::LoadFile(QString file, QObject* parent) {
