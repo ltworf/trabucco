@@ -1,9 +1,11 @@
 #include "searchaction.h"
 
 #include <QProcessEnvironment>
+#include <QDesktopServices>
 #include <QDirIterator>
 #include <QFileInfo>
 #include <QSettings>
+#include <QUrl>
 
 SearchAction::SearchAction(QString name, QString query, bool hidden, QObject *parent): Action(parent) {
     this->name = name + ":";
@@ -110,4 +112,12 @@ bool SearchAction::isPrefix() {
 }
 QString SearchAction::getIcon() {
     return "";
+}
+
+void SearchAction::runAction(QString query) {
+    QString url = this->action;
+    QByteArray encoded = QUrl::toPercentEncoding(query);
+    url.replace("\\{@}", encoded);
+
+    QDesktopServices::openUrl(url);
 }

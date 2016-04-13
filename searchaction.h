@@ -17,6 +17,7 @@ public:
 public slots:
     virtual bool isPrefix();
     virtual QString getIcon();
+    virtual void runAction(QString);
 private:
     SearchAction(QString name, QString query, bool hidden, QObject* parent=NULL);
     QString query;
