@@ -22,9 +22,8 @@ QList<SearchAction*> SearchAction::LoadFile(QString file, QObject* parent) {
     //Some validation
     {
         QString type = settings.value("Desktop Entry/Type","").toString();
-        QString service_types = settings.value("Desktop Entry/ServiceTypes","").toString();
 
-        if (type != "Service" || service_types != "SearchProvider")
+        if (type != "Service")
             return r;
     }
 
