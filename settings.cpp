@@ -42,6 +42,7 @@ Settings::Settings(QWidget *parent) :
     QSettings settings;
     ui->chkBookmarks->setChecked(settings.value("Source/Bookmarks", true).toBool());
     ui->chkDesktop->setChecked(settings.value("Source/Desktop", true).toBool());
+    ui->chkSearch->setChecked(settings.value("Source/SearchProvider", true).toBool());
     unsigned int modifier = settings.value("Shortcut/modifier", Mod1Mask).toUInt();
     QString key = settings.value("Shortcut/keycode", "space").toString();
     addModifiers(this->ui->cmbModifier, modifier);
@@ -52,6 +53,7 @@ void Settings::accept() {
     QSettings settings;
     settings.setValue("Source/Bookmarks", this->ui->chkBookmarks->isChecked());
     settings.setValue("Source/Desktop", this->ui->chkDesktop->isChecked());
+    settings.setValue("Source/SearchProvider", this->ui->chkSearch->isChecked());
 
     settings.setValue("Shortcut/modifier", this->ui->cmbModifier->currentData());
     settings.setValue("Shortcut/keycode", this->ui->cmbKey->currentData());
