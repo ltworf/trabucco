@@ -17,6 +17,7 @@ public slots:
     QString getAction();
     virtual QString getIcon();
     virtual void runAction();
+    virtual void runAction(QString);
     virtual bool hasCornerIcon();
     virtual bool isPrefix();
     virtual QString getCornerIcon();

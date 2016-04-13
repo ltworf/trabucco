@@ -41,3 +41,5 @@ bool Action::isPrefix() {
 }
 
 void Action::runAction() {}
+
+void Action::runAction(QString _) {}
