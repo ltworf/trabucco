@@ -41,7 +41,9 @@ static void load_from_chromium(BTree *tree, QJsonValue *value) {
             QString url = obj.value("url").toString();
 
             if (name.length()!=0 && url.length() != 0) {
-                tree->add(new BookmarkAction(name,url,""));
+                BookmarkAction* bookmark = new BookmarkAction(name,url,"");
+                if (!tree->add(bookmark))
+                    delete bookmark;
             }
 
         } else {
@@ -114,7 +116,9 @@ static void load_from_firefox_places(
             continue;
 
         QString icon_url = query.value(2).toString();
-        tree->add(new BookmarkAction(title, url, icon_url));
+        BookmarkAction* bookmark = new BookmarkAction(title, url, icon_url);
+        if (!tree->add(bookmark))
+            delete bookmark;
     }
 
     db.close();
@@ -211,7 +215,9 @@ static void load_from_opera12(
         QString name(section.mid(name_idx, name_end - name_idx).toString());
         QString url(section.mid(url_idx, url_end - url_idx).toString());
 
-        tree->add(new BookmarkAction(name, url, QString()));
+        BookmarkAction* bookmark = new BookmarkAction(name, url, QString());
+        if (!tree->add(bookmark))
+            delete bookmark;
     }
 }
 

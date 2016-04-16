@@ -129,9 +129,7 @@ static void iterate_dir(BTree* tree, QString dir) {
 
         if (info.isFile() && info.isReadable()) {
             DesktopAction * action = new DesktopAction(path);
-            if (action->mustShow())
-                tree->add(action);
-            else
+            if (!action->mustShow() || !tree->add(action))
                 delete action;
         }
 

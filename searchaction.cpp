@@ -101,9 +101,7 @@ static void iterate_dir(BTree* tree, QString dir) {
             QList<SearchAction*> actions = SearchAction::LoadFile(path);
             for (int i=0; i < actions.size(); i++) {
                 SearchAction* action = actions.at(i);
-                if (action->mustShow())
-                    tree->add(action);
-                else
+                if (!action->mustShow() || !tree->add(action))
                     delete action;
             }
         }
