@@ -16,6 +16,7 @@ Right now it can search:
 
  * Installed applications
  * Bookmarks
+ * Web shortcuts (Those KDE things to search on google by typing gg:string)
 
 Build
 =====
