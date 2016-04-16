@@ -251,7 +251,21 @@ void BookmarkAction::LoadBookmarkActions(BTree* tree) {
 }
 
 QStringList* BookmarkAction::GetPaths() {
-    return NULL;
+    static QStringList* result = NULL;
+    if (result)
+        return result;
+    result = new QStringList();
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+
+    QString config_root = env.value("XDG_CONFIG_HOME",
+                                    env.value("HOME") + "/.config");
+
+    result->append(config_root + "/chromium/Default/Bookmarks");
+    result->append(config_root + "/opera/Bookmarks");
+    result->append(config_root + "/google-chrome/Default/Bookmarks");
+    result->append(env.value("HOME") + "/.opera/bookmarks.adr");
+    //TODO firefox path for bookmarks
+    return result;
 }
 
 bool BookmarkAction::hasCornerIcon() {
