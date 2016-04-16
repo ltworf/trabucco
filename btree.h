@@ -10,7 +10,7 @@ class BTree : public QObject {
 public:
     explicit BTree(QObject * parent=NULL);
 public slots:
-    void add(Action* action);
+    bool add(Action* action);
     Action* getAction();
     BTree* getLeft();
     BTree* getRight();

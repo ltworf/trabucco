@@ -14,13 +14,13 @@ BTree* BTree::getRight() {
     return right;
 }
 
-void BTree::add(Action* action) {
+bool BTree::add(Action* action) {
     if (!this->action) {
         this->action = action;
-        return;
+        return true;
     } else if (this->action->getName() == action->getName()) {
         //Avoid duplicates
-        return;
+        return false;
     }
 
     bool go_left = action->getName().compare(this->action->getName(), Qt::CaseInsensitive) < 0;
@@ -31,7 +31,7 @@ void BTree::add(Action* action) {
         right = new BTree(this);
 
     if (go_left)
-        left->add(action);
+        return left->add(action);
     else
-        right->add(action);
+        return right->add(action);
 }
