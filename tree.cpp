@@ -13,6 +13,8 @@ Tree::Tree(QObject *parent) : QObject(parent) {
         this->watcher.addPaths(*DesktopAction::GetPaths());
     if(this->searchprovider)
         this->watcher.addPaths(*SearchAction::GetPaths());
+    if(this->bookmarks)
+        this->watcher.addPaths(*BookmarkAction::GetPaths());
 
     connect(
         &this->watcher,
