@@ -3,8 +3,7 @@
 #include <QNetworkRequest>
 #include <QDir>
 
-Downloader::Downloader(QStringList sources, QString destination, QObject *parent) : QObject(parent)
-{
+Downloader::Downloader(QStringList sources, QString destination, QObject *parent) : QObject(parent) {
     this->sources = sources;
     this->destination = destination;
     //this->dest_file = QFile(destination);

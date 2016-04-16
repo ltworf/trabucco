@@ -57,14 +57,14 @@ DesktopAction::DesktopAction(QString file, QObject *parent): Action(parent) {
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 
     QSet<QString> desktop_environments = QSet<QString>::fromList(
-                env.value("XDG_CURRENT_DESKTOP","").split(":")
-    );
+            env.value("XDG_CURRENT_DESKTOP","").split(":")
+                                         );
     QSet<QString> not_show = QSet<QString>::fromList(
-                settings.value("Desktop Entry/NotShowIn","").toString().split(":")
-    );
+                                 settings.value("Desktop Entry/NotShowIn","").toString().split(":")
+                             );
     QSet<QString> show_in = QSet<QString>::fromList(
-                settings.value("Desktop Entry/OnlyShowIn","").toString().split(":")
-    );
+                                settings.value("Desktop Entry/OnlyShowIn","").toString().split(":")
+                            );
 
     desktop_environments.remove("");
     not_show.remove("");

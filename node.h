@@ -7,8 +7,7 @@
 
 #include "action.h"
 
-class Node
-{
+class Node {
 public:
     Node();
     Node(Action* action);

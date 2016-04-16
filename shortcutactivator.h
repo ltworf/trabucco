@@ -3,8 +3,7 @@
 
 #include <QThread>
 
-class ShortcutActivator : public QThread
-{
+class ShortcutActivator : public QThread {
     Q_OBJECT
 public:
     explicit ShortcutActivator(QObject *parent = 0);

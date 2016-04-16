@@ -3,8 +3,7 @@
 
 #include <QString>
 
-class IconFinder
-{
+class IconFinder {
 public:
     static QString FindIcon(QString icon);
 };

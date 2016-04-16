@@ -7,8 +7,7 @@
 #include "action.h"
 #include "btree.h"
 
-class DesktopAction: public Action
-{
+class DesktopAction: public Action {
 public:
     DesktopAction(QString file,QObject * parent=NULL);
     static void LoadDesktopActions(BTree*);

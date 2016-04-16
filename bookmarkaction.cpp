@@ -87,38 +87,37 @@ static void load_from_chromium(BTree* tree, QFileInfo chromium_bookmarks) {
  * Load bookmark actions from a Firefox-like `places` SQLite database
  */
 static void load_from_firefox_places(
-	BTree *tree, //< [out] action tree to add actions to
-	QString dbfile) //< path to a Firefox places database
-{
-	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    BTree *tree, //< [out] action tree to add actions to
+    QString dbfile) { //< path to a Firefox places database
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 
-	db.setDatabaseName(dbfile);
-	if (!db.open()) {
+    db.setDatabaseName(dbfile);
+    if (!db.open()) {
         qDebug() << "Failed to open Firefox bookmarks @ " << dbfile << "\n";
-	}
+    }
 
-	qDebug() << "Loading Firefox bookmarks @ " << dbfile << "\n";
+    qDebug() << "Loading Firefox bookmarks @ " << dbfile << "\n";
 
-	QSqlQuery query(
-		"select moz_bookmarks.title, moz_places.url, moz_favicons.url "
-		"from moz_bookmarks, moz_places left join moz_favicons "
-		"on moz_places.favicon_id = moz_favicons.id "
-		"where moz_bookmarks.fk = moz_places.id;",
-		db);
+    QSqlQuery query(
+        "select moz_bookmarks.title, moz_places.url, moz_favicons.url "
+        "from moz_bookmarks, moz_places left join moz_favicons "
+        "on moz_places.favicon_id = moz_favicons.id "
+        "where moz_bookmarks.fk = moz_places.id;",
+        db);
 
-	while (query.next()) {
-		QString title = query.value(0).toString();
-		QString url = query.value(1).toString();
+    while (query.next()) {
+        QString title = query.value(0).toString();
+        QString url = query.value(1).toString();
 
-		// skip entry if it has no title or it's a special place or a bookmarklet
-		if (title.isEmpty() || url.startsWith("place:") || url.startsWith("javascript:"))
-			continue;
+        // skip entry if it has no title or it's a special place or a bookmarklet
+        if (title.isEmpty() || url.startsWith("place:") || url.startsWith("javascript:"))
+            continue;
 
-		QString icon_url = query.value(2).toString();
-		tree->add(new BookmarkAction(title, url, icon_url));
-	}
+        QString icon_url = query.value(2).toString();
+        tree->add(new BookmarkAction(title, url, icon_url));
+    }
 
-	db.close();
+    db.close();
 }
 
 /**
@@ -127,41 +126,40 @@ static void load_from_firefox_places(
  * Load bookmark actions from the default Firefox profile found in a given directory
  */
 static void load_from_firefox(
-	BTree *tree, //< [out] action tree to add actions to
-	QString path) //< path to a Firefox configuration directory
-{
-	QSettings profiles(path + "profiles.ini", QSettings::IniFormat);
+    BTree *tree, //< [out] action tree to add actions to
+    QString path) { //< path to a Firefox configuration directory
+    QSettings profiles(path + "profiles.ini", QSettings::IniFormat);
 
-	QStringList groups(profiles.childGroups());
-	groups.removeAll("General");
+    QStringList groups(profiles.childGroups());
+    groups.removeAll("General");
 
-	QStringListIterator group(groups);
-	QString section;
+    QStringListIterator group(groups);
+    QString section;
 
-	// If there are multiple profiles defined, then we want the one with
-	// Default=1; otherwise, we just want the first one. We could do conditionals
-	// based on the number of elements in groups, but it's simpler to just
-	// over the whole list, break if we meet one with Default=1, and
-	// just leave the last one selected.
-	while (group.hasNext()) {
-		section = group.next();
-		if (profiles.value(section + "/Default").toInt() == 1)
-			break;
-	}
+    // If there are multiple profiles defined, then we want the one with
+    // Default=1; otherwise, we just want the first one. We could do conditionals
+    // based on the number of elements in groups, but it's simpler to just
+    // over the whole list, break if we meet one with Default=1, and
+    // just leave the last one selected.
+    while (group.hasNext()) {
+        section = group.next();
+        if (profiles.value(section + "/Default").toInt() == 1)
+            break;
+    }
 
-	if (section.isEmpty()) {
-		qDebug() << "No Firefox profile found\n";
-		return;
-	}
+    if (section.isEmpty()) {
+        qDebug() << "No Firefox profile found\n";
+        return;
+    }
 
-	profiles.beginGroup(section);
+    profiles.beginGroup(section);
 
-	qDebug() << "Loading from profile " << profiles.value("Name").toString() << "\n";
+    qDebug() << "Loading from profile " << profiles.value("Name").toString() << "\n";
 
-	// TODO FIXME handle IsRelative
-	QString places_path = path + profiles.value("Path").toString() + "/places.sqlite";
-	load_from_firefox_places(tree, places_path);
-	profiles.endGroup();
+    // TODO FIXME handle IsRelative
+    QString places_path = path + profiles.value("Path").toString() + "/places.sqlite";
+    load_from_firefox_places(tree, places_path);
+    profiles.endGroup();
 
 }
 
@@ -169,53 +167,52 @@ static void load_from_firefox(
  * Load bookmarks from an Opera bookmark list (pre-Blink versions)
  */
 static void load_from_opera12(
-	BTree* tree, //< [out] action tree to add actions to
-	QString path) //< path to the old Opera bookmark file
-{
-	QFile bookmarks(path);
-	if (!bookmarks.exists())
-		return;
+    BTree* tree, //< [out] action tree to add actions to
+    QString path) { //< path to the old Opera bookmark file
+    QFile bookmarks(path);
+    if (!bookmarks.exists())
+        return;
 
-	bookmarks.open(QIODevice::ReadOnly);
-	// file is UTF-8 encoded, and QString reads a QByteArray assuming
-	// that encoding, so we're good
-	QString content(bookmarks.readAll());
+    bookmarks.open(QIODevice::ReadOnly);
+    // file is UTF-8 encoded, and QString reads a QByteArray assuming
+    // that encoding, so we're good
+    QString content(bookmarks.readAll());
 
-	int section_begin = 0;
-	int section_end = 0;
+    int section_begin = 0;
+    int section_end = 0;
 
-	// delete the Trash folder from the content
-	section_begin = content.indexOf("TRASH FOLDER=YES");
-	section_end = content.indexOf("\n\n-\n\n", section_begin);
-	content.remove(section_begin, section_end - section_begin);
+    // delete the Trash folder from the content
+    section_begin = content.indexOf("TRASH FOLDER=YES");
+    section_end = content.indexOf("\n\n-\n\n", section_begin);
+    content.remove(section_begin, section_end - section_begin);
 
-	// bookmarks are stored in sections that begin with #URL and end with double-newlines
-	while ((section_begin = content.indexOf("#URL\n", section_end)) >= 0) {
-		section_end = content.indexOf("\n\n", section_begin);
-		if (section_end < 0)
-			section_end = content.length();
-		QStringRef section(&content, section_begin, section_end - section_begin);
+    // bookmarks are stored in sections that begin with #URL and end with double-newlines
+    while ((section_begin = content.indexOf("#URL\n", section_end)) >= 0) {
+        section_end = content.indexOf("\n\n", section_begin);
+        if (section_end < 0)
+            section_end = content.length();
+        QStringRef section(&content, section_begin, section_end - section_begin);
 
-		// skip 'partner' bookmarks
-		if (section.contains("\tPARTNERID="))
-			continue;
+        // skip 'partner' bookmarks
+        if (section.contains("\tPARTNERID="))
+            continue;
 
-		int name_idx = section.indexOf("\tNAME=");
-		int url_idx = section.indexOf("\tURL=");
-		if (name_idx < 0 || url_idx < 0)
-			continue;
+        int name_idx = section.indexOf("\tNAME=");
+        int url_idx = section.indexOf("\tURL=");
+        if (name_idx < 0 || url_idx < 0)
+            continue;
 
-		name_idx += 6;
-		url_idx += 5;
+        name_idx += 6;
+        url_idx += 5;
 
-		int name_end = section.indexOf("\n", name_idx);
-		int url_end = section.indexOf("\n", url_idx);
+        int name_end = section.indexOf("\n", name_idx);
+        int url_end = section.indexOf("\n", url_idx);
 
-		QString name(section.mid(name_idx, name_end - name_idx).toString());
-		QString url(section.mid(url_idx, url_end - url_idx).toString());
+        QString name(section.mid(name_idx, name_end - name_idx).toString());
+        QString url(section.mid(url_idx, url_end - url_idx).toString());
 
-		tree->add(new BookmarkAction(name, url, QString()));
-	}
+        tree->add(new BookmarkAction(name, url, QString()));
+    }
 }
 
 /**
@@ -228,7 +225,7 @@ void BookmarkAction::LoadBookmarkActions(BTree* tree) {
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 
     QString config_root = env.value("XDG_CONFIG_HOME",
-	    env.value("HOME") + "/.config");
+                                    env.value("HOME") + "/.config");
 
     QFileInfo chromium_bookmarks(config_root + "/chromium/Default/Bookmarks");
     load_from_chromium(tree, chromium_bookmarks);

@@ -30,9 +30,9 @@ QString Cache::cached_icon(QUrl url) {
     url.setQuery("");
 
     QByteArray hash = QCryptographicHash::hash(
-        url.toString().toLatin1(),
-        QCryptographicHash::Md5
-    );
+                          url.toString().toLatin1(),
+                          QCryptographicHash::Md5
+                      );
 
     QString cache_dir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
 

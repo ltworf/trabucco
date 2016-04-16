@@ -35,8 +35,7 @@ static void addKeys(QComboBox* box, QString key) {
 
 Settings::Settings(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Settings)
-{
+    ui(new Ui::Settings) {
     ui->setupUi(this);
 
     QSettings settings;
@@ -61,7 +60,6 @@ void Settings::accept() {
     QDialog::accept();
 }
 
-Settings::~Settings()
-{
+Settings::~Settings() {
     delete ui;
 }

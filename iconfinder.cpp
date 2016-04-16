@@ -10,7 +10,7 @@ QString IconFinder::FindIcon(QString icon) {
     static QStringList dirs;
     if (!init) {
         QStringList paths = QIcon::themeSearchPaths();
-        for (int i=0; i<paths.length();i++) {
+        for (int i=0; i<paths.length(); i++) {
             dirs.append(paths.at(i) + "/" + QIcon::themeName() + "/");
             dirs.append(paths.at(i) + "/hicolor/");
             dirs.append(paths.at(i) + "/breeze/");

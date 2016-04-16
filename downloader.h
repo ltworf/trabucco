@@ -8,8 +8,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 
-class Downloader : public QObject
-{
+class Downloader : public QObject {
     Q_OBJECT
 public:
     explicit Downloader(QStringList sources, QString destination, QObject *parent = 0);

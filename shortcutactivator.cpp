@@ -6,8 +6,7 @@
 #include <cstdlib>
 
 
-ShortcutActivator::ShortcutActivator(QObject *parent) : QThread(parent)
-{
+ShortcutActivator::ShortcutActivator(QObject *parent) : QThread(parent) {
     QSettings settings;
 
     const char* k = settings.value("Shortcut/keycode","space").toString().toStdString().c_str();
@@ -56,8 +55,7 @@ void ShortcutActivator::run() {
         }
     }
 
-    while(true)
-    {
+    while(true) {
         XNextEvent(dpy, &ev);
         if (ev.type == KeyPress) {
             printf("Key pressed\n");
