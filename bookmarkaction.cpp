@@ -27,7 +27,7 @@
  * This function iterates the entire document until it finds
  * actual bookmarks and adds them.
  */
-static void load_from_chromium(BTree *tree, QJsonValue *value) {
+static void load_from_chromium(BTree *tree, QJsonValue *value, QObject* parent) {
     if (value->isUndefined())
         return;
 
@@ -41,7 +41,7 @@ static void load_from_chromium(BTree *tree, QJsonValue *value) {
             QString url = obj.value("url").toString();
 
             if (name.length()!=0 && url.length() != 0) {
-                BookmarkAction* bookmark = new BookmarkAction(name,url,"");
+                BookmarkAction* bookmark = new BookmarkAction(name,url,"", parent);
                 if (!tree->add(bookmark))
                     delete bookmark;
             }
@@ -50,14 +50,14 @@ static void load_from_chromium(BTree *tree, QJsonValue *value) {
             QStringList keys = obj.keys();
             for (int i = 0; i < keys.length(); i++) {
                 QJsonValue tmp = obj.value(keys[i]);
-                load_from_chromium(tree, &tmp);
+                load_from_chromium(tree, &tmp, parent);
             }
         }
     } else if (value->isArray()) {
         QJsonArray array = value->toArray();
         for (int i=0; i< array.size(); i++) {
             QJsonValue tmp = array.at(i);
-            load_from_chromium(tree, &tmp);
+            load_from_chromium(tree, &tmp, parent);
         }
     }
 }
@@ -69,7 +69,7 @@ static void load_from_chromium(BTree *tree, QJsonValue *value) {
  *
  * Load bookmarks actions from a chromium-like json file into the tree.
  */
-static void load_from_chromium(BTree* tree, QFileInfo chromium_bookmarks) {
+static void load_from_chromium(BTree* tree, QFileInfo chromium_bookmarks, QObject* parent) {
     if (chromium_bookmarks.exists() && chromium_bookmarks.isReadable()) {
         QFile bookmarks(chromium_bookmarks.absoluteFilePath());
         bookmarks.open(QIODevice::ReadOnly);
@@ -77,7 +77,7 @@ static void load_from_chromium(BTree* tree, QFileInfo chromium_bookmarks) {
         QJsonDocument document = QJsonDocument::fromJson(content);
         if (document.isObject()) {
             QJsonValue obj = document.object();
-            load_from_chromium(tree, &obj);
+            load_from_chromium(tree, &obj, parent);
         }
 
     }
@@ -90,7 +90,9 @@ static void load_from_chromium(BTree* tree, QFileInfo chromium_bookmarks) {
  */
 static void load_from_firefox_places(
     BTree *tree, //< [out] action tree to add actions to
-    QString dbfile) { //< path to a Firefox places database
+    QString dbfile, //< path to a Firefox places database
+    QObject* parent
+) {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 
     db.setDatabaseName(dbfile);
@@ -116,7 +118,7 @@ static void load_from_firefox_places(
             continue;
 
         QString icon_url = query.value(2).toString();
-        BookmarkAction* bookmark = new BookmarkAction(title, url, icon_url);
+        BookmarkAction* bookmark = new BookmarkAction(title, url, icon_url, parent);
         if (!tree->add(bookmark))
             delete bookmark;
     }
@@ -131,7 +133,9 @@ static void load_from_firefox_places(
  */
 static void load_from_firefox(
     BTree *tree, //< [out] action tree to add actions to
-    QString path) { //< path to a Firefox configuration directory
+    QString path,//< path to a Firefox configuration directory
+    QObject* parent
+) {
     QSettings profiles(path + "profiles.ini", QSettings::IniFormat);
 
     QStringList groups(profiles.childGroups());
@@ -162,7 +166,7 @@ static void load_from_firefox(
 
     // TODO FIXME handle IsRelative
     QString places_path = path + profiles.value("Path").toString() + "/places.sqlite";
-    load_from_firefox_places(tree, places_path);
+    load_from_firefox_places(tree, places_path, parent);
     profiles.endGroup();
 
 }
@@ -172,7 +176,9 @@ static void load_from_firefox(
  */
 static void load_from_opera12(
     BTree* tree, //< [out] action tree to add actions to
-    QString path) { //< path to the old Opera bookmark file
+    QString path, //< path to the old Opera bookmark file
+    QObject* parent
+) {
     QFile bookmarks(path);
     if (!bookmarks.exists())
         return;
@@ -215,7 +221,7 @@ static void load_from_opera12(
         QString name(section.mid(name_idx, name_end - name_idx).toString());
         QString url(section.mid(url_idx, url_end - url_idx).toString());
 
-        BookmarkAction* bookmark = new BookmarkAction(name, url, QString());
+        BookmarkAction* bookmark = new BookmarkAction(name, url, QString(), parent);
         if (!tree->add(bookmark))
             delete bookmark;
     }
@@ -227,26 +233,26 @@ static void load_from_opera12(
  *
  * Loads bookmarks actions inside the tree
  */
-void BookmarkAction::LoadBookmarkActions(BTree* tree) {
+void BookmarkAction::LoadBookmarkActions(BTree* tree, QObject *parent) {
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 
     QString config_root = env.value("XDG_CONFIG_HOME",
                                     env.value("HOME") + "/.config");
 
     QFileInfo chromium_bookmarks(config_root + "/chromium/Default/Bookmarks");
-    load_from_chromium(tree, chromium_bookmarks);
+    load_from_chromium(tree, chromium_bookmarks, parent);
 
     QFileInfo opera_bookmarks(config_root + "/opera/Bookmarks");
-    load_from_chromium(tree, opera_bookmarks);
+    load_from_chromium(tree, opera_bookmarks, parent);
 
     QFileInfo google_chrome(config_root + "/google-chrome/Default/Bookmarks");
-    load_from_chromium(tree, google_chrome);
+    load_from_chromium(tree, google_chrome, parent);
 
     QString ff_config_root = env.value("HOME") + "/.mozilla/firefox/";
 
-    load_from_firefox(tree, ff_config_root);
+    load_from_firefox(tree, ff_config_root, parent);
 
-    load_from_opera12(tree, env.value("HOME") + "/.opera/bookmarks.adr");
+    load_from_opera12(tree, env.value("HOME") + "/.opera/bookmarks.adr", parent);
 
 }
 

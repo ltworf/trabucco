@@ -11,7 +11,7 @@
 class SearchAction: public Action {
 public:
     static QList<SearchAction*> LoadFile(QString file, QObject* parent=NULL);
-    static void LoadSearchActions(BTree*);
+    static void LoadSearchActions(BTree*, QObject* parent=NULL);
     static QStringList* GetPaths();
     bool mustShow();
 public slots:

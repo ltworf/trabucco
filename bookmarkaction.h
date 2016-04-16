@@ -11,7 +11,7 @@
 class BookmarkAction: public Action {
 public:
     BookmarkAction(QString name, QUrl url, QString icon, QObject* parent=NULL);
-    static void LoadBookmarkActions(BTree*);
+    static void LoadBookmarkActions(BTree*, QObject* parent=NULL);
     static QStringList* GetPaths();
 public slots:
     virtual void runAction();

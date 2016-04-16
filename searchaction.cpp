@@ -82,7 +82,7 @@ QStringList* SearchAction::GetPaths() {
 }
 
 //TODO de-duplicate this code with the one in desktopaction.cpp
-static void iterate_dir(BTree* tree, QString dir) {
+static void iterate_dir(BTree* tree, QString dir, QObject* parent) {
 
     // Include subdirectories and follow links
     QDirIterator i(dir, QDirIterator::Subdirectories | QDirIterator::FollowSymlinks);
@@ -98,7 +98,7 @@ static void iterate_dir(BTree* tree, QString dir) {
 
         if (info.isFile() && info.isReadable()) {
 
-            QList<SearchAction*> actions = SearchAction::LoadFile(path);
+            QList<SearchAction*> actions = SearchAction::LoadFile(path, parent);
             for (int i=0; i < actions.size(); i++) {
                 SearchAction* action = actions.at(i);
                 if (!action->mustShow() || !tree->add(action))
@@ -113,11 +113,11 @@ bool SearchAction::mustShow() {
     return this->show;
 }
 
-void SearchAction::LoadSearchActions(BTree* tree) {
+void SearchAction::LoadSearchActions(BTree* tree, QObject *parent) {
     QStringListIterator i(*SearchAction::GetPaths());
 
     while (i.hasNext()) {
-        iterate_dir(tree, i.next());
+        iterate_dir(tree, i.next(), parent);
     }
 }
 
