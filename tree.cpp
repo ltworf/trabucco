@@ -20,6 +20,12 @@ Tree::Tree(QObject *parent) : QObject(parent) {
         this,
         &Tree::rescan
     );
+    connect(
+        &this->watcher,
+        &QFileSystemWatcher::fileChanged,
+        this,
+        &Tree::rescan
+    );
 
     QSettings settings;
     this->bookmarks = settings.value("Source/Bookmarks", true).toBool();
