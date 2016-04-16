@@ -23,11 +23,11 @@ private:
     bool bookmarks;
     bool desktop;
     bool searchprovider;
+    QObject* action_parent = NULL;
     Action * last = NULL;
     QString last_prefix;
     Node * node = NULL;
     QFileSystemWatcher watcher;
-    QList<Action*> actions;
 };
 
 #endif // TREE_H

@@ -1,6 +1,5 @@
 #include "tree.h"
 
-#include <QStringListIterator>
 #include <QSettings>
 
 #include "btree.h"
@@ -43,29 +42,24 @@ void Tree::rescan() {
     printf("Rescan triggered\n");
 
     {
-        QListIterator<Action*> i(this->actions);
-        while (i.hasNext()) {
-            delete i.next();
-        }
-        this->actions.clear();
-
+        delete this->action_parent;
         delete this->node;
     }
 
     {
+        this->action_parent = new QObject(this);
         this->node = new Node();
         BTree sorted_tree;
         if (this->desktop)
-            DesktopAction::LoadDesktopActions(&sorted_tree);
+            DesktopAction::LoadDesktopActions(&sorted_tree, this->action_parent);
         if (this->bookmarks)
-            BookmarkAction::LoadBookmarkActions(&sorted_tree);
+            BookmarkAction::LoadBookmarkActions(&sorted_tree, this->action_parent);
         if (this->searchprovider)
-            SearchAction::LoadSearchActions(&sorted_tree);
+            SearchAction::LoadSearchActions(&sorted_tree, this->action_parent);
         BTreeIterator i(&sorted_tree);
 
         while (i.hasNext()) {
             Action* a = i.next();
-            this->actions.append(a);
             node->add(a);
         }
     }
