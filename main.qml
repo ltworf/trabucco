@@ -17,9 +17,14 @@ ApplicationWindow {
     Connections {
         target: ShortcutX11
         onActivated: {
-            window.show()
-            window.raise()
-            window.requestActivate()
+            if (window.visible) {
+                window.setVisible(false);
+                reset();
+            } else {
+                window.show()
+                window.raise()
+                window.requestActivate()
+            }
         }
     }
     id: window
