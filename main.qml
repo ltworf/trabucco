@@ -3,6 +3,16 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 1.3
 
 ApplicationWindow {
+    function appear() {
+        fadeIn.start()
+        window.show()
+        window.raise()
+        window.requestActivate()
+    }
+    function disappear() {
+        fadeOut.start();
+    }
+
     function reset() {
         icon.source = "trabucco.gif"
         search.text = ""
@@ -17,14 +27,10 @@ ApplicationWindow {
     Connections {
         target: ShortcutX11
         onActivated: {
-            if (window.visible) {
-                window.setVisible(false);
-                reset();
-            } else {
-                window.show()
-                window.raise()
-                window.requestActivate()
-            }
+            if (window.visible)
+                disappear();
+            else
+                appear();
         }
     }
     id: window
@@ -41,9 +47,25 @@ ApplicationWindow {
 
     Rectangle
     {
+        NumberAnimation on opacity {
+            id: fadeIn
+            from: 0
+            to: 0.8
+            duration: 250
+        }
+        NumberAnimation on opacity {
+            id: fadeOut
+            from: 0.8
+            to: 0
+            duration: 250
+            onStopped: {
+                window.setVisible(false);
+                reset();
+            }
+        }
+
         smooth: true
         radius: width / 15
-        opacity: 0.8
         color:"black"
         anchors.fill: parent
 
@@ -93,15 +115,13 @@ ApplicationWindow {
             Shortcut {
                 sequence: "Esc"
                 onActivated: {
-                    window.setVisible(false)
-                    reset()
+                    disappear();
                 }
             }
 
             onAccepted: {
                 tree.runAction()
-                window.setVisible(false)
-                reset()
+                disappear();
             }
 
 
