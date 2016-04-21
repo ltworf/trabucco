@@ -42,6 +42,9 @@ Settings::Settings(QWidget *parent) :
     ui->chkBookmarks->setChecked(settings.value("Source/Bookmarks", true).toBool());
     ui->chkDesktop->setChecked(settings.value("Source/Desktop", true).toBool());
     ui->chkSearch->setChecked(settings.value("Source/SearchProvider", true).toBool());
+    ui->spnDuration->setValue(settings.value("duration", 250).toInt());
+    ui->spnOpacity->setValue(settings.value("opacity", 0.8).toDouble());
+
     unsigned int modifier = settings.value("Shortcut/modifier", Mod1Mask).toUInt();
     QString key = settings.value("Shortcut/keycode", "space").toString();
     addModifiers(this->ui->cmbModifier, modifier);
@@ -56,6 +59,9 @@ void Settings::accept() {
 
     settings.setValue("Shortcut/modifier", this->ui->cmbModifier->currentData());
     settings.setValue("Shortcut/keycode", this->ui->cmbKey->currentData());
+
+    settings.setValue("duration", this->ui->spnDuration->value());
+    settings.setValue("opacity", this->ui->spnOpacity->value());
 
     QDialog::accept();
 }
