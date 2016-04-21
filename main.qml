@@ -42,7 +42,7 @@ ApplicationWindow {
     Rectangle
     {
         smooth: true
-        radius: 15
+        radius: width / 15
         opacity: 0.8
         color:"black"
         anchors.fill: parent
