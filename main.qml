@@ -1,6 +1,7 @@
 import QtQuick 2.5
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.3
+import Qt.labs.settings 1.0
 
 ApplicationWindow {
     function appear() {
@@ -22,6 +23,12 @@ ApplicationWindow {
 
     function startsWith(long_string, header){
         return long_string.substr(0, header.length) == header
+    }
+
+    Settings {
+        id: settings;
+        property int duration: 250;
+        property double opacity: 0.8;
     }
 
     Connections {
@@ -50,14 +57,14 @@ ApplicationWindow {
         NumberAnimation on opacity {
             id: fadeIn
             from: 0
-            to: 0.8
-            duration: 250
+            to: settings.opacity;
+            duration: settings.duration;
         }
         NumberAnimation on opacity {
             id: fadeOut
-            from: 0.8
+            from: settings.opacity;
             to: 0
-            duration: 250
+            duration: settings.duration;
             onStopped: {
                 window.setVisible(false);
                 reset();
