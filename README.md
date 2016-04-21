@@ -53,3 +53,12 @@ Trabucco aims to solve these problems by showing only one suggestion per
 search string, and being deterministic about it.
 
 I will add plugins for things that I need.
+
+Debug
+=====
+
+To compile with debug symbols,
+```
+qmake CONFIG+=debug ..
+make
+```
