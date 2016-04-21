@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>Changes will be applied when the program is restarted</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#fcff1c;&quot;&gt;⚠&lt;/span&gt; Changes will be applied when the program is restarted&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
