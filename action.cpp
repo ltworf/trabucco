@@ -42,4 +42,4 @@ bool Action::isPrefix() {
 
 void Action::runAction() {}
 
-void Action::runAction(QString _) {}
+void Action::runAction(QString /* unused */) {}
