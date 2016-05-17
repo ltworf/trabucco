@@ -62,6 +62,12 @@ QString IconFinder::FindIcon(QString icon) {
         ".png",
     };
 
+    //In case a full path is provided
+    QFileInfo i(icon);
+    if (i.exists() && i.isReadable()) {
+        return icon;
+    }
+
     //Strip format from icon field, if it has one
     for (unsigned int f=0; f<sizeof(formats)/sizeof(int*); f++) {
         if (icon.endsWith(formats[f])) {
@@ -80,8 +86,6 @@ QString IconFinder::FindIcon(QString icon) {
             }
         }
     }
-
-
 
     return "";
 }
