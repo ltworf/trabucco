@@ -3,6 +3,7 @@
 #include <QFileInfo>
 #include <QIcon>
 #include <QDebug>
+#include <QDir>
 
 static QStringList* search_paths() {
     static bool init = false;
@@ -19,6 +20,7 @@ static QStringList* search_paths() {
             themes.append(themes_paths.at(i) + "/oxygen/");
         }
         themes.append("/usr/share/pixmaps/");
+        themes.append(QDir::homePath() + "/.local/share/icons/");
 
         static const char * paths[] = {
             "scalable/apps/",
