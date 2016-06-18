@@ -1,14 +1,13 @@
-unix:!android {
-    isEmpty(target.path) {
-        qnx {
-            target.path = /tmp/$${TARGET}/bin
-        } else {
-            target.path = /opt/$${TARGET}/bin
-        }
-        export(target.path)
-    }
-    INSTALLS += target
+isEmpty(target.path) {
+    target.path = $${DESTDIR}/usr/bin
+    export(target.path)
 }
+INSTALLS += target
+
+searchproviders.path = $${DESTDIR}/usr/share/kservices5/searchproviders/
+searchproviders.files = searchproviders/*
+INSTALLS += searchproviders
+
 
 export(INSTALLS)
 
