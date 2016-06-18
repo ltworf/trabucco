@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Service
+Name=Soundcloud
+X-KDE-ServiceTypes=SearchProvider
+Keys=tz
+Query=http://torrentz.com/search?q=\\{@}
+Charset=utf8
