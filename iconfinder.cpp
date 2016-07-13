@@ -23,6 +23,11 @@ static QStringList* search_paths() {
             QString home_local_share = env.value("XDG_DATA_HOME", QDir::homePath() + "/.local/share/");
             QString home_icons = QDir::cleanPath(home_local_share + "/icons");
             QString home_pixmaps = QDir::cleanPath(home_local_share + "/pixmaps");
+
+            qDebug() << home_local_share;
+            qDebug() << home_icons;
+            qDebug() << home_pixmaps;
+
             QFileInfo info(home_icons);
             if (info.exists() && info.isDir()) {
                 themes_paths.prepend(home_icons);
@@ -31,6 +36,7 @@ static QStringList* search_paths() {
             if (info.exists() && info.isDir()) {
                 themes_paths.prepend(home_pixmaps);
             }
+            themes_paths.append("/usr/share/pixmaps");
             themes_paths.removeDuplicates();
             QIcon::setThemeSearchPaths(themes_paths);
         }
