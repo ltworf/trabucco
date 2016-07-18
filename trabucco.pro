@@ -21,3 +21,7 @@ HEADERS += \
 
 FORMS += \
     settings.ui
+
+INSTALL += searchshortcuts
+
+DISTFILES += main.qml trabucco.gif searchproviders/*
