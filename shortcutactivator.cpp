@@ -1,10 +1,19 @@
 #include "shortcutactivator.h"
 
+#include <QDebug>
 #include <QSettings>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <cstdlib>
 
+int xerrorhandler(Display *, XErrorEvent * ev) {
+
+    if (ev->error_code == BadAccess) {
+        qDebug() << "Unable to grab global shortcut";
+        //TODO handle this
+    }
+    return 0;
+}
 
 ShortcutActivator::ShortcutActivator(QObject *parent) : QThread(parent) {
     QSettings settings;
@@ -20,6 +29,7 @@ void ShortcutActivator::end() {
 }
 
 void ShortcutActivator::run() {
+    XSetErrorHandler(xerrorhandler);
     Display* dpy = XOpenDisplay(getenv("DISPLAY"));
     Window root_window = DefaultRootWindow(dpy);
     XEvent ev;
