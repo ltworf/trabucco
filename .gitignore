@@ -72,3 +72,7 @@ Thumbs.db
 *.exe
 
 build
+debian/debhelper-build-stamp
+debian/files
+debian/trabucco.debhelper.log
+debian/trabucco.substvars
