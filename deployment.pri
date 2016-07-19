@@ -8,6 +8,10 @@ searchproviders.path = $${DESTDIR}/usr/share/kservices5/searchproviders/
 searchproviders.files = searchproviders/*
 INSTALLS += searchproviders
 
+launcher.path = $${DESTDIR}/usr/share/applications/
+launcher.files = extras/trabucco.desktop
+INSTALLS += launcher
+
 
 export(INSTALLS)
 

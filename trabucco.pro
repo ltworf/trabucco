@@ -25,4 +25,4 @@ FORMS += \
 
 INSTALL += searchshortcuts
 
-DISTFILES += main.qml trabucco.gif searchproviders/*
+DISTFILES += main.qml trabucco.gif searchproviders/* extras/*
