@@ -12,6 +12,10 @@ launcher.path = $${DESTDIR}/usr/share/applications/
 launcher.files = extras/trabucco.desktop
 INSTALLS += launcher
 
+manpage.path= $${DESTDIR}/usr/share/man/man1/
+manpage.files = extras/trabucco.1
+INSTALLS += manpage
+
 
 export(INSTALLS)
 
