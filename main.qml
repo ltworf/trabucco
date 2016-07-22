@@ -15,7 +15,7 @@ ApplicationWindow {
     }
 
     function reset() {
-        icon.source = "trabucco.gif"
+        icon.source = settings.defaultimg
         search.text = ""
         name.text = "Trabucco!"
         cornerIcon.visible = false
@@ -29,6 +29,7 @@ ApplicationWindow {
         id: settings;
         property int duration: 250;
         property double opacity: 0.8;
+        property string defaultimg: "trabucco.gif";
     }
 
     Connections {
@@ -79,7 +80,7 @@ ApplicationWindow {
         Image {
             id: icon
             opacity: 1
-            source: "trabucco.gif"
+            source: settings.defaultimg
 
             //Make the icon area slightly smaller than the window
             width: parent.width * 0.95
@@ -155,7 +156,7 @@ ApplicationWindow {
                     name.text = '<font color="blue">' + search.text + '</font>'
                 } else {
                     name.text = '<font color="blue">' + search.text + '</font>'
-                    icon.source = "trabucco.gif"
+                    icon.source = settings.defaultimg
                     cornerIcon.visible = false
                     return
                 }
@@ -167,7 +168,7 @@ ApplicationWindow {
                     icon.sourceSize.width = icon.width
                     icon.sourceSize.height = icon.height
                 } else
-                    icon.source = "trabucco.gif"
+                    icon.source = settings.defaultimg
                 if (a.hasCornerIcon() && a.getCornerIcon()) {
                     cornerIcon.visible = true
                     cornerIcon.source = 'file://' + a.getCornerIcon()
