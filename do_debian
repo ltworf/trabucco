@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# Create archive
+qmake .
+make dist
+make distclean
+
+# Give it a debian name
+rename "s/trabucco/trabucco_/" *.tar.gz
+rename "s/.tar.gz/.orig.tar.gz/" *.tar.gz
+
+ls
+
+# Sign the archive
+gpg --sign --armor --detach-sign *.orig.tar.gz
+
+
+
+T=$(mktemp -d)
+U=$(mktemp -d)
+mv *.tar.gz $T
+
+cd $T
+tar -xvvf *
+cd -
+
+mv $T/*tar.gz $U
+
+UNCOMPRESSED=$(realpath $T/*)
+mv $U/* $T/
+mv *.tar.gz* $T/
+
+rmdir $U
+
+cp -r debian/ $UNCOMPRESSED/
+
+cd $UNCOMPRESSED
+dpkg-buildpackage
+echo $UNCOMPRESSED
+
