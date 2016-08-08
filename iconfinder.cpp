@@ -65,8 +65,10 @@ static QStringList* search_paths() {
 
         for (int i=0; i<themes_paths.length(); i++) {
             themes.append(themes_paths.at(i) + "/" + QIcon::themeName() + "/");
+            themes.append(themes_paths.at(i) + "/" + QIcon::themeName() + "/base/");
             themes.append(themes_paths.at(i) + "/breeze/");
             themes.append(themes_paths.at(i) + "/oxygen/");
+            themes.append(themes_paths.at(i) + "/oxygen/base/");
             themes.append(themes_paths.at(i) + "/hicolor/");
             themes.append(themes_paths.at(i) + "/");
         }
