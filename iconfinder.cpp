@@ -126,6 +126,7 @@ static QStringList* search_paths() {
                 QString dir = themes.at(i) + QString(paths[j]);
                 QFileInfo info(dir);
                 if (info.exists() && info.isDir() && !dirs.contains(dir)) {
+                    qDebug() << "Adding" << dir << "to icon search path";
                     dirs.append(dir);
                 }
             }
@@ -166,8 +167,8 @@ QString IconFinder::FindIcon(QString icon) {
         for (unsigned int f=0; f<sizeof(formats)/sizeof(int*); f++) {
             QString attempt = dirs->at(d) + icon + QString(formats[f]);
             QFileInfo i(attempt);
+            qDebug() << "Attempting icon" << attempt;
             if (i.exists() && i.isReadable()) {
-                qDebug() << attempt << "\n";
                 return attempt;
             }
         }
