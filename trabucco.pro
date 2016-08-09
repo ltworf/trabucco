@@ -1,7 +1,7 @@
 TEMPLATE = app
 VERSION = 1.0
 
-QT += qml quick widgets gui sql network
+QT += qml widgets gui sql network
 CONFIG += c++11
 
 LIBS        += -lX11
