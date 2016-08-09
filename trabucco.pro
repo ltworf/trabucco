@@ -5,6 +5,7 @@ QT += qml widgets gui sql network
 CONFIG += c++11
 
 LIBS        += -lX11
+QMAKE_LFLAGS += -Wl,--as-needed
 
 SOURCES += main.cpp \
     settings.cpp \
