@@ -28,11 +28,17 @@ Copyright (C) 2016 Giuseppe Bilotta
 #include "tree.h"
 #include "shortcutactivator.h"
 #include "settings.h"
+#include "singleinstance.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     app.setApplicationName("Trabucco");
     app.setOrganizationDomain("SiegeSoftware");
+
+    if (!SingleInstance::unique("trabucco", SESSION)) {
+        qDebug() << "Already running";
+        return 1;
+    }
 
     Cache::create_cache_dir();
 
