@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Service
-Name=Soundcloud
-X-KDE-ServiceTypes=SearchProvider
-Keys=sc
-Query=https://soundcloud.com/search?q=\\{@}
-Charset=utf8
