@@ -70,7 +70,7 @@ ApplicationWindow {
         setX(Screen.width / 2 - width / 2);
         setY(Screen.height / 2 - height / 2);
     }
-    flags: Qt.Tool | Qt.FramelessWindowHint
+    flags: Qt.WindowStaysOnTopHint | Qt.X11BypassWindowManagerHint
     color: "transparent"
 
     Rectangle
