@@ -61,6 +61,12 @@ ApplicationWindow {
                 appear();
         }
     }
+
+    onActiveChanged: {
+        if (!active)
+            disappear();
+    }
+
     id: window
     visible: false
     title: "Trabucco!"
