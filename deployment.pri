@@ -31,7 +31,8 @@ HEADERS += \
     $$PWD/bookmarkaction.h \
     $$PWD/cache.h \
     $$PWD/downloader.h \
-    $$PWD/searchaction.h
+    $$PWD/searchaction.h \
+    $$PWD/clipboard.h
 
 SOURCES += \
     $$PWD/action.cpp \
@@ -45,4 +46,5 @@ SOURCES += \
     $$PWD/bookmarkaction.cpp \
     $$PWD/cache.cpp \
     $$PWD/downloader.cpp \
-    $$PWD/searchaction.cpp
+    $$PWD/searchaction.cpp \
+    $$PWD/clipboard.cpp
