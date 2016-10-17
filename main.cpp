@@ -25,6 +25,7 @@ Copyright (C) 2016 Giuseppe Bilotta
 #include <QSystemTrayIcon>
 
 #include "cache.h"
+#include "clipboard.h"
 #include "tree.h"
 #include "shortcutactivator.h"
 #include "settings.h"
@@ -45,11 +46,13 @@ int main(int argc, char *argv[]) {
     Tree t;
 
     ShortcutActivator shortcut;
+    Clipboard clipboard;
 
 
     shortcut.start();
 
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("clipboard", &clipboard);
     engine.rootContext()->setContextProperty("tree", &t);
     engine.rootContext()->setContextProperty("ShortcutX11", &shortcut);
     qmlRegisterType<Action>("trabucco.siegesoftware", 1, 0, "Action");
