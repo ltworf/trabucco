@@ -24,6 +24,14 @@ import QtQuick.Controls 1.3
 import Qt.labs.settings 1.0
 
 ApplicationWindow {
+    MouseArea {
+        acceptedButtons: Qt.MiddleButton
+        anchors.fill: parent
+        onClicked: {
+            search.insert(search.length, clipboard.getSelection())
+        }
+    }
+
     function appear() {
         fadeIn.start()
         window.show()
