@@ -94,7 +94,9 @@ QStringList* SearchAction::GetPaths() {
 
     if (env.contains("HOME")) {
         QString home = env.value("HOME");
+        QString xdg_data_home = env.value("XDG_DATA_HOME", home + "/.local/share/");
         result->append(home + "/.kde/share/kde4/services/searchproviders");
+        result->append(xdg_data_home + "/kservices5/searchproviders");
     }
 
     return result;
