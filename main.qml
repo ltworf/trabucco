@@ -57,7 +57,7 @@ ApplicationWindow {
         id: settings;
         property int duration: 250;
         property double opacity: 0.8;
-        property string defaultimg: "trabucco.gif";
+        property string defaultimg: "trabucco.png";
     }
 
     Connections {

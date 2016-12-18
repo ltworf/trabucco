@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>trabucco.gif</file>
+        <file>trabucco.png</file>
     </qresource>
 </RCC>
