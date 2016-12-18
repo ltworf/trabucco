@@ -16,8 +16,8 @@ manpage.path = $${DESTDIR}/usr/share/man/man1/
 manpage.files = extras/trabucco.1
 INSTALLS += manpage
 
-icon.path = $${DESTDIR}/usr/share/icons/hicolor/256x256/apps
-icon.files = trabucco.png
+icon.path = $${DESTDIR}/usr/share/icons/hicolor/512x512/apps
+icon.files = extras/trabucco.png
 INSTALLS += icon
 
 
