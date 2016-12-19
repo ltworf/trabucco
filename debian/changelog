@@ -1,5 +1,5 @@
-trabucco (1.0-1) UNRELEASED; urgency=medium
+trabucco (1.0-1) unstable; urgency=low
 
-  * Initial release. (Closes: #XXXXXX)
+  * Initial release. (Closes: #848667)
 
- -- Salvo Tomaselli <tiposchi@tiscali.it>  Wed, 20 Jul 2016 00:21:30 +0200
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Mon, 19 Dec 2016 14:31:13 +0100
