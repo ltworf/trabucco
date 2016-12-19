@@ -26,6 +26,7 @@ Copyright (C) 2016 Giuseppe Bilotta
 
 #include "cache.h"
 #include "clipboard.h"
+#include "iconfinder.h"
 #include "tree.h"
 #include "shortcutactivator.h"
 #include "settings.h"
@@ -62,7 +63,7 @@ int main(int argc, char *argv[]) {
 
 
     QSystemTrayIcon tray;
-    tray.setIcon(QIcon(":/trabucco.png"));
+    tray.setIcon(QIcon(IconFinder::FindIcon("trabucco")));
     tray.show();
     tray.showMessage("Trabucco","Trabucco is running. Press Alt+Space", QSystemTrayIcon::Information, 2000);
 
