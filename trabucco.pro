@@ -28,5 +28,6 @@ FORMS += \
 
 INSTALL += searchshortcuts
 
-DISTFILES += main.qml extras/*
+DISTFILES += main.qml extras/* \
+    CHANGELOG
 # searchproviders/* 
