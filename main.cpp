@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
 
     ShortcutActivator shortcut;
     Clipboard clipboard;
-
+    QString icon_path = IconFinder::FindIcon("trabucco");
 
     shortcut.start();
 
@@ -56,6 +56,7 @@ int main(int argc, char *argv[]) {
     engine.rootContext()->setContextProperty("clipboard", &clipboard);
     engine.rootContext()->setContextProperty("tree", &t);
     engine.rootContext()->setContextProperty("ShortcutX11", &shortcut);
+    engine.rootContext()->setContextProperty("trabucco_icon", QVariant::fromValue("file://" + icon_path));
     qmlRegisterType<Action>("trabucco.siegesoftware", 1, 0, "Action");
 
 
@@ -63,7 +64,7 @@ int main(int argc, char *argv[]) {
 
 
     QSystemTrayIcon tray;
-    tray.setIcon(QIcon(IconFinder::FindIcon("trabucco")));
+    tray.setIcon(QIcon(icon_path));
     tray.show();
     tray.showMessage("Trabucco","Trabucco is running. Press Alt+Space", QSystemTrayIcon::Information, 2000);
 
