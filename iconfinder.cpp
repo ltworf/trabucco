@@ -150,7 +150,7 @@ QString IconFinder::FindIcon(QString icon) {
 
     //In case a full path is provided
     QFileInfo i(icon);
-    if (i.exists() && i.isReadable()) {
+    if (icon.startsWith('/') && i.exists() && i.isReadable()) {
         return icon;
     }
 
