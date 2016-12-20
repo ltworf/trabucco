@@ -38,6 +38,7 @@ ApplicationWindow {
         window.raise()
         window.requestActivate()
     }
+
     function disappear() {
         fadeOut.start();
     }
@@ -58,6 +59,12 @@ ApplicationWindow {
         property int duration: 250;
         property double opacity: 0.8;
         property string defaultimg: trabucco_icon;
+        property string selected_color: 'blue'
+        property string text_color: 'white'
+        property string background_color: 'black'
+        property int corner_factor: 15
+        property int size_factor: 6
+        property int text_size: 40
     }
 
     Connections {
@@ -78,7 +85,7 @@ ApplicationWindow {
     id: window
     visible: false
     title: "Trabucco!"
-    width: Screen.width /6 > 300? Screen.width /6: 300
+    width: Screen.width / settings.size_factor > 300 ? Screen.width / settings.size_factor: 300
     height: width + name.height
     Component.onCompleted: {
         setX(Screen.width / 2 - width / 2);
@@ -107,8 +114,8 @@ ApplicationWindow {
         }
 
         smooth: true
-        radius: width / 15
-        color:"black"
+        radius: width / settings.corner_factor
+        color: settings.background_color
         anchors.fill: parent
 
         Image {
@@ -137,10 +144,10 @@ ApplicationWindow {
             id: name
             anchors.top: icon.bottom
             width: parent.width
-            font.pointSize: 40
+            font.pointSize: settings.text_size
             fontSizeMode: Text.HorizontalFit
             text: "Trabucco!"
-            color: "white"
+            color: settings.text_color
             horizontalAlignment: Text.AlignHCenter
         }
 
@@ -175,14 +182,13 @@ ApplicationWindow {
                     is_prefix = a.isPrefix()
                 }
 
-
                 if (startsWith(action_name.toLowerCase(),text.toLowerCase())) {
-                    name.text = '<font color="blue">' + action_name.substr(0,search.text.length) + '</font>'
+                    name.text = '<font color="' + settings.selected_color +'">' + action_name.substr(0,search.text.length) + '</font>'
                     name.text += action_name.substr(text.length, action_name.length)
                 } else if (is_prefix) {
-                    name.text = '<font color="blue">' + search.text + '</font>'
+                    name.text = '<font color="' + settings.selected_color +'">' + search.text + '</font>'
                 } else {
-                    name.text = '<font color="blue">' + search.text + '</font>'
+                    name.text = '<font color="' + settings.selected_color +'">' + search.text + '</font>'
                     icon.source = settings.defaultimg
                     cornerIcon.visible = false
                     return
