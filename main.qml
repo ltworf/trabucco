@@ -148,12 +148,7 @@ ApplicationWindow {
             id: search
             focus: true
             visible: false
-            width: parent.width
-            horizontalAlignment: Text.AlignHCenter
-            anchors.top: name.bottom
             text: ''
-            color: 'white'
-            font.pointSize: 35
             Shortcut {
                 sequence: "Esc"
                 onActivated: {
@@ -165,8 +160,6 @@ ApplicationWindow {
                 tree.runAction()
                 disappear();
             }
-
-
 
             onTextChanged: {
                 if (!search.text.length) {
