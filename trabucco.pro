@@ -2,10 +2,11 @@ TEMPLATE = app
 VERSION = 1.0
 
 QT += qml widgets gui sql network
-CONFIG += c++11
+CONFIG += c++11 strict_c++
 
 LIBS        += -lX11
 QMAKE_LFLAGS += -Wl,--as-needed
+QMAKE_CXXFLAGS += -Wextra
 
 RESOURCES += qml.qrc
 
