@@ -50,7 +50,7 @@ INSTALL += searchshortcuts
 
 DISTFILES += main.qml extras/* \
     CHANGELOG
-# searchproviders/* 
+# searchproviders/*
 
 isEmpty(target.path) {
     target.path = $${DESTDIR}/usr/bin
