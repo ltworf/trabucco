@@ -18,7 +18,8 @@ Copyright (C) 2016  Salvo "LtWorf" Tomaselli
 Copyright (C) 2016 Giuseppe Bilotta
 */
 
-import QtQuick 2.5
+import QtQuick 2.7
+
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.3
 import Qt.labs.settings 1.0
@@ -54,14 +55,15 @@ ApplicationWindow {
         return long_string.substr(0, header.length) == header
     }
 
+    SystemPalette { id: activePalette; colorGroup: SystemPalette.Active }
     Settings {
         id: settings;
         property int duration: 250;
         property double opacity: 0.8;
         property string defaultimg: trabucco_icon;
-        property string selected_color: 'blue'
-        property string text_color: 'white'
-        property string background_color: 'black'
+        property color selected_color: activePalette.highlight;
+        property color text_color: activePalette.windowText;
+        property color background_color: activePalette.dark;
         property int corner_factor: 15
         property int size_factor: 6
         property int text_size: 40
