@@ -1,0 +1,29 @@
+#!/bin/sh
+
+title=$1
+script=~/.ynew/$1
+
+if ! test -e $script
+then
+	echo command does not exist
+	read  -p "add a new command? [Y/n]" a
+
+	if test -z "$a" 
+	then
+		a="y"
+	fi
+
+	if [ "$a" = "y" ] || [ "$a" = "Y" ]
+	then
+		mkdir ~/.ynew
+		echo "#!/bin/sh" > $script
+		chmod u+x $script
+		editor $script
+	fi
+	exit 0
+fi
+
+newsession=$(qdbus  org.kde.yakuake /yakuake/sessions org.kde.yakuake.addSession)
+
+qdbus  org.kde.yakuake /yakuake/tabs org.kde.yakuake.setTabTitle $newsession $title
+qdbus  org.kde.yakuake /yakuake/sessions org.kde.yakuake.runCommandInTerminal $newsession "$script ; exit"
