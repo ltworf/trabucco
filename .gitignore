@@ -1,0 +1,5 @@
+debian/debhelper-build-stamp
+debian/files
+debian/ynew.debhelper.log
+debian/ynew.substvars
+debian/ynew/
