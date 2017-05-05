@@ -20,7 +20,7 @@ then
 
 	if [ "$a" = "y" ] || [ "$a" = "Y" ]
 	then
-		mkdir ~/.ynew
+		mkdir -p ~/.ynew
 		echo "#!/bin/sh" > $script
 		chmod u+x $script
 		editor $script
