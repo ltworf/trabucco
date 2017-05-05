@@ -13,7 +13,7 @@ then
 	echo command does not exist
 	read  -p "add a new command? [Y/n]" a
 
-	if test -z "$a" 
+	if test -z "$a"
 	then
 		a="y"
 	fi
@@ -23,7 +23,12 @@ then
 		mkdir -p ~/.ynew
 		echo "#!/bin/sh" > $script
 		chmod u+x $script
-		editor $script
+		ED=${EDITOR:-editor}
+		if command -v $ED > /dev/null; then
+			$ED $script
+		else
+			vi $script
+		fi
 	fi
 	exit 0
 fi
