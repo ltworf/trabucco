@@ -41,11 +41,13 @@ mv *.tar.gz* $T/
 
 rmdir $U
 
+git stash
 git checkout debian
 cp -r debian/ $UNCOMPRESSED/
 git checkout -
+git stash pop
 
 cd $UNCOMPRESSED
 dpkg-buildpackage
+lintian ../*.dsc
 echo $UNCOMPRESSED
-
