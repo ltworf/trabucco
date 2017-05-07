@@ -9,12 +9,21 @@ make distclean
 rename "s/trabucco/trabucco_/" *.tar.gz
 rename "s/.tar.gz/.orig.tar.gz/" *.tar.gz
 
-ls
+ARCHIVE=$(ls *.orig.tar.gz)
+
+# Remove Qt crap from the archive
+TMPDIR=$(mktemp -d)
+mv $ARCHIVE $TMPDIR
+cd $TMPDIR
+tar -xf *
+rm -rf $(find | grep /usr)
+rm $ARCHIVE
+tar -czf $ARCHIVE *
+cd -
+mv $TMPDIR/$ARCHIVE .
 
 # Sign the archive
 gpg --sign --armor --detach-sign *.orig.tar.gz
-
-
 
 T=$(mktemp -d)
 U=$(mktemp -d)
@@ -32,7 +41,9 @@ mv *.tar.gz* $T/
 
 rmdir $U
 
+git checkout debian
 cp -r debian/ $UNCOMPRESSED/
+git checkout -
 
 cd $UNCOMPRESSED
 dpkg-buildpackage
