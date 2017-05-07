@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Service
-Name=Reddit
-Keys=r
-Query=https://www.reddit.com/r/\\{@}/
-Charset=utf8
-X-KDE-ServiceTypes=SearchProvider
