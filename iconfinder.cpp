@@ -139,7 +139,7 @@ static QStringList* search_paths() {
             for (unsigned int j=0;j<sizeof(paths)/sizeof(int*); j++) {
                 QString dir = themes.at(i) + QString(paths[j]);
                 QFileInfo info(dir);
-                if (info.exists() && info.isDir() && !dirs.contains(dir)) {
+                if (info.exists() && info.isDir() && !dirs.contains(dir) && QDir(dir).count() > 2) {
                     qDebug() << "Adding" << dir << "to icon search path";
                     dirs.append(dir);
                 }
