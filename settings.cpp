@@ -93,5 +93,4 @@ void Settings::grab_error() {
     this->ui->tabWidget->setCurrentIndex(1);
     this->ui->lblGrabError->setText("Shortcut already in use. Select a different one");
     this->show();
-
 }
