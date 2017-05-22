@@ -37,20 +37,23 @@ int real_main(int argc, char *argv[]) {
     app.setApplicationName("Trabucco");
     app.setOrganizationDomain("SiegeSoftware");
 
+    QString icon_path = IconFinder::FindIcon("trabucco");
+    QSystemTrayIcon tray;
+    tray.setIcon(QIcon(icon_path));
+    tray.show();
+
     if (!SingleInstance::unique("trabucco", SESSION)) {
         qDebug() << "Already running";
+        tray.showMessage("Trabucco","Trabucco is already running.", QSystemTrayIcon::Warning, 4000);
         return 1;
     }
 
     Cache::create_cache_dir();
-
     Tree t;
 
     ShortcutActivator shortcut;
     Settings settings;
     Clipboard clipboard;
-    QSystemTrayIcon tray;
-    QString icon_path = IconFinder::FindIcon("trabucco");
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("clipboard", &clipboard);
@@ -60,10 +63,6 @@ int real_main(int argc, char *argv[]) {
     qmlRegisterType<Action>("trabucco.siegesoftware", 1, 0, "Action");
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-
-    tray.setIcon(QIcon(icon_path));
-    tray.show();
-    tray.showMessage("Trabucco","Trabucco is running. Press " + shortcut.shortcut_name(), QSystemTrayIcon::Information, 2000);
 
     Settings::connect(
         &tray,
@@ -80,7 +79,7 @@ int real_main(int argc, char *argv[]) {
     );
 
     shortcut.start();
-
+    tray.showMessage("Trabucco","Trabucco is running. Press " + shortcut.shortcut_name(), QSystemTrayIcon::Information, 2000);
     return app.exec();
 }
 
