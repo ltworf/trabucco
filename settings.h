@@ -34,6 +34,7 @@ public:
     ~Settings();
 public slots:
     void accept();
+    void grab_error();
 private:
     Ui::Settings *ui;
 };
