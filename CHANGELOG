@@ -1,5 +1,7 @@
 1.1
 * Find more icons
+* Show UI to select a different shortcut, if the default one is taken
+* Able to reload configuration
 
 1.0
 * Initial release
