@@ -32,7 +32,7 @@ Copyright (C) 2016 Giuseppe Bilotta
 #include "settings.h"
 #include "singleinstance.h"
 
-int main(int argc, char *argv[]) {
+int real_main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     app.setApplicationName("Trabucco");
     app.setOrganizationDomain("SiegeSoftware");
@@ -82,4 +82,13 @@ int main(int argc, char *argv[]) {
     shortcut.start();
 
     return app.exec();
+}
+
+int main(int argc, char *argv[]) {
+    // A trick to reload the configuration
+    while(true) {
+        int r = real_main(argc, argv);
+        if (r != CONFIG_RELOAD)
+            return r;
+    }
 }

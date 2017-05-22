@@ -22,6 +22,8 @@ Copyright (C) 2016  Salvo "LtWorf" Tomaselli
 
 #include <QDialog>
 
+#define CONFIG_RELOAD 23
+
 namespace Ui {
 class Settings;
 }

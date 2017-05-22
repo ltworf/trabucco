@@ -83,6 +83,7 @@ void Settings::accept() {
     settings.setValue("opacity", this->ui->spnOpacity->value());
 
     QDialog::accept();
+    QApplication::exit(CONFIG_RELOAD);
 }
 
 Settings::~Settings() {

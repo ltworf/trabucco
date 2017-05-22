@@ -106,6 +106,7 @@ void ShortcutActivator::run() {
     XSync(dpy, false);
 
     if (grab_error) {
+        grab_error = false;
         emit grab_failed();
     }
 
