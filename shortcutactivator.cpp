@@ -49,6 +49,23 @@ void ShortcutActivator::end() {
     this->terminate = true;
 }
 
+QString ShortcutActivator::shortcut_name() {
+    QSettings settings;
+    QString r;
+    switch (this->modifier) {
+    case Mod1Mask:
+        r = "Alt";
+        break;
+    case ControlMask:
+        r = "Ctrl";
+        break;
+    default:
+        break;
+    }
+    r += "+" + settings.value("Shortcut/keycode","space").toString();
+    return r;
+}
+
 void ShortcutActivator::run() {
     XSetErrorHandler(xerrorhandler);
     Display* dpy = XOpenDisplay(getenv("DISPLAY"));

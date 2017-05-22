@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
 
     tray.setIcon(QIcon(icon_path));
     tray.show();
-    tray.showMessage("Trabucco","Trabucco is running. Press Alt+Space", QSystemTrayIcon::Information, 2000);
+    tray.showMessage("Trabucco","Trabucco is running. Press " + shortcut.shortcut_name(), QSystemTrayIcon::Information, 2000);
 
     Settings::connect(
         &tray,

@@ -21,6 +21,7 @@ Copyright (C) 2016 Giuseppe Bilotta
 #ifndef SHORTCUTACTIVATOR_H
 #define SHORTCUTACTIVATOR_H
 
+#include <QString>
 #include <QThread>
 
 class ShortcutActivator : public QThread {
@@ -34,6 +35,7 @@ signals:
 
 public slots:
     void end();
+    QString shortcut_name();
 private:
     bool terminate = false;
     unsigned char key;
