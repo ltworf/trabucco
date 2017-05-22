@@ -26,11 +26,12 @@ Copyright (C) 2016 Giuseppe Bilotta
 #include <X11/Xutil.h>
 #include <cstdlib>
 
-int xerrorhandler(Display *, XErrorEvent * ev) {
+bool grab_error = False;
 
+int xerrorhandler(Display *, XErrorEvent * ev) {
     if (ev->error_code == BadAccess) {
         qDebug() << "Unable to grab global shortcut";
-        //TODO handle this
+        grab_error = True;
     }
     return 0;
 }
@@ -83,6 +84,12 @@ void ShortcutActivator::run() {
                 keyboard_mode
             );
         }
+    }
+
+    XSync(dpy, false);
+
+    if (grab_error) {
+        emit grab_failed();
     }
 
     while(true) {

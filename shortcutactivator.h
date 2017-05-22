@@ -30,6 +30,7 @@ public:
     void run();
 signals:
     void activated();
+    void grab_failed();
 
 public slots:
     void end();
