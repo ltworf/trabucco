@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Service
+Name=The Pirate Bay
+Keys=tpb
+Query=https://thepiratebay.org/search/\\{@}
+Charset=utf8
+X-KDE-ServiceTypes=SearchProvider
