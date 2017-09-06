@@ -21,15 +21,16 @@ Copyright (C) 2017  Salvo "LtWorf" Tomaselli
 #include <QDirIterator>
 #include <QFileInfo>
 #include <QProcess>
+#include <QSettings>
 
 #include "iconfinder.h"
 #include "ynewaction.h"
 
-YnewAction::YnewAction(QString script, QObject *parent) : Action(parent)
+YnewAction::YnewAction(QString script, QString prefix, QObject *parent) : Action(parent)
 {
     this->script = script;
     this->cached_icon_path = IconFinder::FindIcon("yakuake");
-    this->name = "ynew " + script;
+    this->name = prefix + " " + script;
 }
 
 QString YnewAction::getIcon() {
@@ -43,13 +44,17 @@ void YnewAction::runAction() {
 void YnewAction::LoadYnewActions(BTree* tree, QObject* parent) {
     QStringList* dirs = YnewAction::GetPaths();
     QString dir = dirs->at(0);
+    QSettings settings;
+    QStringList prefixes = settings.value("YnewAction/prefixes", "ynew").toStringList();
 
     QDirIterator i(dir, QDirIterator::FollowSymlinks);
     while (i.hasNext()) {
         QFileInfo file(i.next());
         if (file.isDir() || (! file.isExecutable()))
             continue;
-        tree->add(new YnewAction(file.fileName(), parent));
+
+        for (int i = 0; i < prefixes.size(); i++)
+            tree->add(new YnewAction(file.fileName(), prefixes.at(i), parent));
     }
 }
 

@@ -28,7 +28,7 @@ Copyright (C) 2017  Salvo "LtWorf" Tomaselli
 
 class YnewAction: public Action {
 public:
-    YnewAction(QString script, QObject * parent=NULL);
+    YnewAction(QString script, QString prefix, QObject * parent=NULL);
     static void LoadYnewActions(BTree*, QObject* parent=NULL);
     static QStringList* GetPaths();
 public slots:
