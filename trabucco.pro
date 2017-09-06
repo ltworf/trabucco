@@ -25,7 +25,8 @@ HEADERS += \
     cache.h \
     downloader.h \
     searchaction.h \
-    clipboard.h
+    clipboard.h \
+    ynewaction.h
 
 SOURCES += main.cpp \
     settings.cpp \
@@ -42,7 +43,8 @@ SOURCES += main.cpp \
     cache.cpp \
     downloader.cpp \
     searchaction.cpp \
-    clipboard.cpp
+    clipboard.cpp \
+    ynewaction.cpp
 
 FORMS += \
     settings.ui
