@@ -29,7 +29,6 @@ Copyright (C) 2017  Salvo "LtWorf" Tomaselli
 YnewAction::YnewAction(QString script, QString prefix, QObject *parent) : Action(parent)
 {
     this->script = script;
-    this->cached_icon_path = IconFinder::FindIcon("yakuake");
     this->name = prefix + " " + script;
 }
 
@@ -46,6 +45,7 @@ void YnewAction::LoadYnewActions(BTree* tree, QObject* parent) {
     QString dir = dirs->at(0);
     QSettings settings;
     QStringList prefixes = settings.value("YnewAction/prefixes", "ynew").toStringList();
+    QString yakuake_icon = IconFinder::FindIcon("yakuake");
 
     QDirIterator i(dir, QDirIterator::FollowSymlinks);
     while (i.hasNext()) {
@@ -53,8 +53,11 @@ void YnewAction::LoadYnewActions(BTree* tree, QObject* parent) {
         if (file.isDir() || (! file.isExecutable()))
             continue;
 
-        for (int i = 0; i < prefixes.size(); i++)
-            tree->add(new YnewAction(file.fileName(), prefixes.at(i), parent));
+        for (int i = 0; i < prefixes.size(); i++) {
+            YnewAction* ynew_action = new YnewAction(file.fileName(), prefixes.at(i), parent);
+            ynew_action->cached_icon_path = yakuake_icon;
+            tree->add(ynew_action);
+        }
     }
 }
 
