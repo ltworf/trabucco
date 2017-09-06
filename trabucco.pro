@@ -1,5 +1,5 @@
 TEMPLATE = app
-VERSION = 1.1
+VERSION = 1.2
 
 QT += qml widgets gui sql network
 CONFIG += c++11 strict_c++
