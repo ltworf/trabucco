@@ -26,10 +26,12 @@ Copyright (C) 2017  Salvo "LtWorf" Tomaselli
 #include "iconfinder.h"
 #include "ynewaction.h"
 
+static QString separator;
+
 YnewAction::YnewAction(QString script, QString prefix, QObject *parent) : Action(parent)
 {
     this->script = script;
-    this->name = prefix + " " + script;
+    this->name = prefix + separator + script;
 }
 
 QString YnewAction::getIcon() {
@@ -45,6 +47,7 @@ void YnewAction::LoadYnewActions(BTree* tree, QObject* parent) {
     QString dir = dirs->at(0);
     QSettings settings;
     QStringList prefixes = settings.value("YnewAction/prefixes", "ynew").toStringList();
+    separator = settings.value("YnewAction/separator", " ").toString();
     QString yakuake_icon = IconFinder::FindIcon("yakuake");
 
     QDirIterator i(dir, QDirIterator::FollowSymlinks);
