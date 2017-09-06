@@ -53,6 +53,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="chkYnew">
+         <property name="text">
+          <string>ynew</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -168,6 +175,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>chkDesktop</tabstop>
+  <tabstop>chkBookmarks</tabstop>
+  <tabstop>chkSearch</tabstop>
+  <tabstop>chkYnew</tabstop>
+  <tabstop>cmbModifier</tabstop>
+  <tabstop>cmbKey</tabstop>
+  <tabstop>spnOpacity</tabstop>
+  <tabstop>spnDuration</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
@@ -177,8 +195,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>254</x>
-     <y>633</y>
+     <x>260</x>
+     <y>295</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -193,8 +211,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>322</x>
-     <y>633</y>
+     <x>328</x>
+     <y>295</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
