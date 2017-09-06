@@ -14,7 +14,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Trabucco.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright (C) 2016  Salvo "LtWorf" Tomaselli
+Copyright (C) 2017  Salvo "LtWorf" Tomaselli
 */
 
 #include "tree.h"
@@ -25,12 +25,14 @@ Copyright (C) 2016  Salvo "LtWorf" Tomaselli
 #include "btreeiterator.h"
 #include "bookmarkaction.h"
 #include "searchaction.h"
+#include "ynewaction.h"
 
 Tree::Tree(QObject *parent) : QObject(parent) {
     QSettings settings;
     this->bookmarks = settings.value("Source/Bookmarks", true).toBool();
     this->desktop = settings.value("Source/Desktop", true).toBool();
     this->searchprovider = settings.value("Source/SearchProvider", true).toBool();
+    this->ynew = settings.value("Source/YnewProvider", true).toBool();
 
     if(this->desktop)
         this->watcher.addPaths(*DesktopAction::GetPaths());
@@ -38,6 +40,8 @@ Tree::Tree(QObject *parent) : QObject(parent) {
         this->watcher.addPaths(*SearchAction::GetPaths());
     if(this->bookmarks)
         this->watcher.addPaths(*BookmarkAction::GetPaths());
+    if(this->ynew)
+        this->watcher.addPaths(*YnewAction::GetPaths());
 
     connect(
         &this->watcher,
@@ -75,6 +79,8 @@ void Tree::rescan() {
             BookmarkAction::LoadBookmarkActions(&sorted_tree, this->action_parent);
         if (this->searchprovider)
             SearchAction::LoadSearchActions(&sorted_tree, this->action_parent);
+        if (this->ynew)
+            YnewAction::LoadYnewActions(&sorted_tree, this->action_parent);
         BTreeIterator i(&sorted_tree);
 
         while (i.hasNext()) {

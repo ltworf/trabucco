@@ -43,6 +43,7 @@ private:
     bool bookmarks;
     bool desktop;
     bool searchprovider;
+    bool ynew;
     QObject* action_parent = NULL;
     Action * last = NULL;
     QString last_prefix;
