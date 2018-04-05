@@ -7,6 +7,6 @@ Standards-Version: 3.9.8
 
 Package: ynew
 Architecture: all
-Depends: ${misc:Depends}, qdbus, yakuake,
+Depends: ${misc:Depends}, qdbus-qt5, yakuake,
 Recommends: bash-completion
 Description: Open a named yakuake tab and runs a script in it
