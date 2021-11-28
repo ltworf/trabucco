@@ -1,0 +1,11 @@
+trabucco (1.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Mon, 22 May 2017 20:13:53 +0200
+
+trabucco (1.0-1) unstable; urgency=low
+
+  * Initial release. (Closes: #848667)
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sun, 07 May 2017 19:35:24 +0200

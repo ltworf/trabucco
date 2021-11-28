@@ -1,0 +1,20 @@
+Source: trabucco
+Section: misc
+Priority: optional
+Maintainer: Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>
+Build-Depends: debhelper (>= 10), qt5-qmake, qtbase5-dev, qtdeclarative5-dev
+Standards-Version: 3.9.8
+Homepage: https://github.com/ltworf/trabucco#trabucco
+
+Package: trabucco
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: This is a launcher for people that are nostalgic about katapult
+ Trabucco means trebuchet in Italian, which is a siege weapon, like a catapult.
+ When KDE4 was released, katapult was replaced by krunner.
+ .
+ Trabucco aims at providing an experience similar to katapult, using modern
+ freedesktop.org standards.
+ .
+ It shows only one action per search query, and it is very deterministic about
+ it.
