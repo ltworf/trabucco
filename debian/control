@@ -10,6 +10,7 @@ Rules-Requires-Root: no
 Package: trabucco
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: ynew
 Description: This is a launcher for people that are nostalgic about katapult
  Trabucco means trebuchet in Italian, which is a siege weapon, like a catapult.
  When KDE4 was released, katapult was replaced by krunner.
@@ -19,3 +20,9 @@ Description: This is a launcher for people that are nostalgic about katapult
  .
  It shows only one action per search query, and it is very deterministic about
  it.
+
+Package: ynew
+Architecture: all
+Depends: ${misc:Depends}, qdbus-qt5, yakuake,
+Recommends: bash-completion
+Description: Open a named yakuake tab and runs a script in it
