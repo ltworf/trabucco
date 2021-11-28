@@ -58,7 +58,9 @@ DISTFILES += main.qml extras/* \
     CODE_OF_CONDUCT.md \
     COPYING \
 #    searchproviders/* \
-    ynew/ynew
+    ynew/ynew \
+    ynew/autocomplete/ynew.autocomplete \
+    ynew/README.md
 
 isEmpty(target.path) {
     target.path = $${DESTDIR}/usr/bin
@@ -85,5 +87,9 @@ INSTALLS += icon
 ynew.path = $${DESTDIR}/usr/bin/
 ynew.files = ynew/ynew
 INSTALLS += ynew
+
+ynew_autocomplete.files = ynew/autocomplete/ynew
+ynew_autocomplete.path = $${DESTDIR}/usr/share/bash-completion/completions/
+INSTALLS += ynew_autocomplete
 
 export(INSTALLS)
