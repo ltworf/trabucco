@@ -13,15 +13,3 @@ After saving the script, running `ynew pippo` again, will open a new tab named
 *pippo* which will contain the ssh session.
 
 Script for bash completion is also provided.
-
-
-Install
-=======
-
-`make install`
-
-
-Debian package
-==============
-
-You can create a Debian package running `dpkg-buildpackage`.
