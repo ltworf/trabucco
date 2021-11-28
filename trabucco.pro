@@ -11,40 +11,41 @@ QMAKE_CXXFLAGS += -Wextra
 RESOURCES += qml.qrc
 
 HEADERS += \
-    settings.h \
-    singleinstance.h \
-    action.h \
-    desktopaction.h \
-    tree.h \
-    node.h \
-    iconfinder.h \
-    shortcutactivator.h \
-    btree.h \
-    btreeiterator.h \
-    bookmarkaction.h \
-    cache.h \
-    downloader.h \
-    searchaction.h \
-    clipboard.h \
-    ynewaction.h
+    src/settings.h \
+    src/singleinstance.h \
+    src/action.h \
+    src/desktopaction.h \
+    src/tree.h \
+    src/node.h \
+    src/iconfinder.h \
+    src/shortcutactivator.h \
+    src/btree.h \
+    src/btreeiterator.h \
+    src/bookmarkaction.h \
+    src/cache.h \
+    src/downloader.h \
+    src/searchaction.h \
+    src/clipboard.h \
+    src/ynewaction.h
 
-SOURCES += main.cpp \
-    settings.cpp \
-    singleinstance.cpp \
-    action.cpp \
-    desktopaction.cpp \
-    tree.cpp \
-    node.cpp \
-    iconfinder.cpp \
-    shortcutactivator.cpp \
-    btree.cpp \
-    btreeiterator.cpp \
-    bookmarkaction.cpp \
-    cache.cpp \
-    downloader.cpp \
-    searchaction.cpp \
-    clipboard.cpp \
-    ynewaction.cpp
+SOURCES += \
+    src/main.cpp \
+    src/settings.cpp \
+    src/singleinstance.cpp \
+    src/action.cpp \
+    src/desktopaction.cpp \
+    src/tree.cpp \
+    src/node.cpp \
+    src/iconfinder.cpp \
+    src/shortcutactivator.cpp \
+    src/btree.cpp \
+    src/btreeiterator.cpp \
+    src/bookmarkaction.cpp \
+    src/cache.cpp \
+    src/downloader.cpp \
+    src/searchaction.cpp \
+    src/clipboard.cpp \
+    src/ynewaction.cpp
 
 FORMS += \
     settings.ui
