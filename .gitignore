@@ -79,3 +79,6 @@ debian/trabucco.substvars
 debian/.debhelper/
 debian/trabucco/
 trabucco
+debian/ynew.debhelper.log
+debian/ynew.substvars
+debian/ynew/
