@@ -56,8 +56,9 @@ DISTFILES += main.qml extras/* \
     CHANGELOG \
     README.md \
     CODE_OF_CONDUCT.md \
-    COPYING
-# searchproviders/*
+    COPYING \
+#    searchproviders/* \
+    ynew/ynew
 
 isEmpty(target.path) {
     target.path = $${DESTDIR}/usr/bin
