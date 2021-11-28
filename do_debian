@@ -21,6 +21,7 @@ rm -rf $(find | grep /usr)
 rm $ARCHIVE
 tar -czf $ARCHIVE *
 cd -
+mv $TMPDIR/$ARCHIVE .
 rm -rf "$TMPDIR"
 
 # Sign the archive
