@@ -1,2 +1,3 @@
 ynew/ynew usr/bin
 ynew/autocomplete/ynew usr/share/bash-completion/completions
+ynew/ynew.1 usr/share/man/man1

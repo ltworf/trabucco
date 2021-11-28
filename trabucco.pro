@@ -60,7 +60,8 @@ DISTFILES += main.qml extras/* \
 #    searchproviders/* \
     ynew/ynew \
     ynew/autocomplete/ynew \
-    ynew/README.md
+    ynew/README.md \
+    ynew/ynew.1
 
 isEmpty(target.path) {
     target.path = $${DESTDIR}/usr/bin
