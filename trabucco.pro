@@ -84,12 +84,4 @@ icon.path = $${DESTDIR}/usr/share/icons/hicolor/512x512/apps
 icon.files = extras/trabucco.png
 INSTALLS += icon
 
-ynew.path = $${DESTDIR}/usr/bin/
-ynew.files = ynew/ynew
-INSTALLS += ynew
-
-ynew_autocomplete.files = ynew/autocomplete/ynew
-ynew_autocomplete.path = $${DESTDIR}/usr/share/bash-completion/completions/
-INSTALLS += ynew_autocomplete
-
 export(INSTALLS)
