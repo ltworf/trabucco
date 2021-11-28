@@ -81,4 +81,8 @@ icon.path = $${DESTDIR}/usr/share/icons/hicolor/512x512/apps
 icon.files = extras/trabucco.png
 INSTALLS += icon
 
+ynew.path = $${DESTDIR}/usr/bin/
+ynew.files = ynew/ynew
+INSTALLS += ynew
+
 export(INSTALLS)
