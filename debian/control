@@ -29,9 +29,9 @@ Description: Open a named yakuake tab and runs a script in it
  A rather simple script to open a new tab in yakuake, set the name of
  the tab, run a script, and close the tab when the script terminates.
  .
- For example, to ssh to a server called `pippo`, you can run "ynew pippo".
+ For example, to ssh to a server called `alfio`, you can run "ynew alfio".
  .
- This will open a new tab in yakuake named pippo which will contain the
+ This will open a new tab in yakuake named alfio which will contain the
  ssh session.
  .
  Script for bash completion is also provided.
