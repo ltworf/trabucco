@@ -5,6 +5,7 @@ Maintainer: Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>
 Build-Depends: debhelper (>= 10), qt5-qmake, qtbase5-dev, qtdeclarative5-dev
 Standards-Version: 3.9.8
 Homepage: https://github.com/ltworf/trabucco#trabucco
+Rules-Requires-Root: no
 
 Package: trabucco
 Architecture: any
