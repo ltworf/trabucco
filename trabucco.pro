@@ -53,7 +53,10 @@ FORMS += \
 INSTALL += searchshortcuts
 
 DISTFILES += main.qml extras/* \
-    CHANGELOG
+    CHANGELOG \
+    README.md \
+    CODE_OF_CONDUCT.md \
+    COPYING
 # searchproviders/*
 
 isEmpty(target.path) {
