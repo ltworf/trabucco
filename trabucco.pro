@@ -59,7 +59,7 @@ DISTFILES += main.qml extras/* \
     COPYING \
 #    searchproviders/* \
     ynew/ynew \
-    ynew/autocomplete/ynew.autocomplete \
+    ynew/autocomplete/ynew \
     ynew/README.md
 
 isEmpty(target.path) {
