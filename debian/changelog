@@ -1,6 +1,7 @@
 trabucco (1.2-1) UNRELEASED; urgency=medium
 
   * New upstream release
+  * Fix d/watch
 
  -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sun, 28 Nov 2021 22:33:52 +0100
 
