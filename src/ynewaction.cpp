@@ -14,7 +14,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Trabucco.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright (C) 2017  Salvo "LtWorf" Tomaselli
+Copyright (C) 2017-2021  Salvo "LtWorf" Tomaselli
 */
 
 #include <QDir>
@@ -45,6 +45,9 @@ void YnewAction::runAction() {
 }
 
 void YnewAction::LoadYnewActions(BTree* tree, QObject* parent) {
+    if (!YnewAction::isYnewInstalled()) {
+        return;
+    }
     QStringList* dirs = YnewAction::GetPaths();
     QString dir = dirs->at(0);
     QSettings settings;
@@ -74,4 +77,9 @@ QStringList* YnewAction::GetPaths() {
     result = new QStringList();
     result->append(QDir::homePath() + "/.ynew/");
     return result;
+}
+
+bool YnewAction::isYnewInstalled() {
+    QFile ynew("/usr/bin/ynew");
+    return ynew.exists();
 }

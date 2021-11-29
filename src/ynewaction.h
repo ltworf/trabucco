@@ -14,7 +14,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Trabucco.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright (C) 2017  Salvo "LtWorf" Tomaselli
+Copyright (C) 2017-2021  Salvo "LtWorf" Tomaselli
 */
 
 #ifndef YNEWACTION_H
@@ -31,6 +31,7 @@ public:
     YnewAction(QString script, QString prefix, QObject * parent=NULL);
     static void LoadYnewActions(BTree*, QObject* parent=NULL);
     static QStringList* GetPaths();
+    static bool isYnewInstalled();
 public slots:
     virtual void runAction();
     virtual QString getIcon();
