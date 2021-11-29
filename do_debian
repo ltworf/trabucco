@@ -48,4 +48,4 @@ popd
 mkdir deb-pkg
 mv $T/* deb-pkg
 rmdir $T
-lintian --pedantic -E --color auto -i -I deb-pkg/*changes
+lintian --pedantic -E --color auto -i -I deb-pkg/*changes deb-pkg/*deb
