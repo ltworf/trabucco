@@ -76,15 +76,23 @@ DesktopAction::DesktopAction(QString file, QObject *parent): Action(parent) {
     //Show/hide depending on the DE being used
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 
-    QSet<QString> desktop_environments = QSet<QString>::fromList(
-            env.value("XDG_CURRENT_DESKTOP","").split(":")
-                                         );
-    QSet<QString> not_show = QSet<QString>::fromList(
-                                 settings.value("Desktop Entry/NotShowIn","").toString().split(":")
-                             );
-    QSet<QString> show_in = QSet<QString>::fromList(
-                                settings.value("Desktop Entry/OnlyShowIn","").toString().split(":")
-                            );
+    QStringList xdg_current_desktop = env.value("XDG_CURRENT_DESKTOP","").split(":");
+    QSet<QString> desktop_environments = QSet<QString>(
+            xdg_current_desktop.begin(),
+            xdg_current_desktop.end()
+    );
+
+    QStringList not_show_list = settings.value("Desktop Entry/NotShowIn","").toString().split(":");
+    QSet<QString> not_show = QSet<QString>(
+            not_show_list.begin(),
+            not_show_list.end()
+    );
+
+    QStringList show_list = settings.value("Desktop Entry/OnlyShowIn","").toString().split(":");
+    QSet<QString> show_in = QSet<QString>(
+            show_list.begin(),
+            show_list.end()
+    );
 
     desktop_environments.remove("");
     not_show.remove("");
