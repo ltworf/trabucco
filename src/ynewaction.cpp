@@ -39,7 +39,9 @@ QString YnewAction::getIcon() {
 }
 
 void YnewAction::runAction() {
-    QProcess::startDetached("ynew " + script);
+    QStringList arguments;
+    arguments << script;
+    QProcess::startDetached("ynew", arguments);
 }
 
 void YnewAction::LoadYnewActions(BTree* tree, QObject* parent) {
