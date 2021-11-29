@@ -45,6 +45,7 @@ popd
 rm -rf "$CODEDIR"
 
 popd
+rm -rf deb-pkg
 mkdir deb-pkg
 mv $T/* deb-pkg
 rmdir $T
