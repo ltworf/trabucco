@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -ex
 
 # Create archive
@@ -15,12 +15,12 @@ ARCHIVE=$(ls *.orig.tar.gz)
 # Remove Qt crap from the archive
 TMPDIR=$(mktemp -d)
 mv $ARCHIVE $TMPDIR
-cd $TMPDIR
+pushd $TMPDIR
 tar -xf *
 rm -rf $(find | grep /usr)
 rm $ARCHIVE
 tar -czf $ARCHIVE *
-cd -
+popd
 mv $TMPDIR/$ARCHIVE .
 rm -rf "$TMPDIR"
 
@@ -33,15 +33,19 @@ T=$(mktemp -d)
 mv *orig.tar.gz* $T
 cp -r debian $T
 
-cd $T
+pushd $T
 tar -xf *gz
 CODEDIR=$(find .  -maxdepth 1 -type d | egrep -v debian\|\\.$)
 mv debian $CODEDIR
-cd $CODEDIR
 
+pushd $CODEDIR
 dpkg-buildpackage --changes-option=-S
+popd
 
-dpkg-buildpackage
-lintian ../*.dsc
+rm -rf "$CODEDIR"
 
-pwd
+popd
+mkdir deb-pkg
+mv $T/* deb-pkg
+rmdir $T
+lintian --pedantic -E --color auto -i -I deb-pkg/*changes
