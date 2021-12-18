@@ -1,4 +1,1 @@
-debian/tmp/usr/share/icons/hicolor/512x512/apps/trabucco.png usr/share/icons/hicolor/512x512/apps
-debian/tmp/usr/share/applications/trabucco.desktop usr/share/applications
-debian/tmp/usr/share/man/man1/trabucco.1 usr/share/man/man1
-debian/tmp/usr/bin/trabucco usr/bin
+debian/tmp/*
