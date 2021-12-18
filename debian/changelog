@@ -1,4 +1,4 @@
-trabucco (1.2-1) UNRELEASED; urgency=medium
+trabucco (1.2-1) unstable; urgency=low
 
   * New upstream release
   * Fix d/watch
@@ -6,7 +6,7 @@ trabucco (1.2-1) UNRELEASED; urgency=medium
   * Rules-Requires-Root: no
   * Bump Standards-Version: 4.6.0
   * New package for ynew
-  * Use new way of specifying compat and bump to 13
+  * Use new way of specifying debhelper and compat and bump to 13
 
  -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sun, 28 Nov 2021 22:33:52 +0100
 

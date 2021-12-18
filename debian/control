@@ -3,7 +3,6 @@ Section: misc
 Priority: optional
 Maintainer: Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>
 Build-Depends:
- debhelper (>= 10),
  debhelper-compat (= 13),
  qt5-qmake,
  qtbase5-dev,
