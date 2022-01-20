@@ -29,6 +29,7 @@ Package: ynew
 Architecture: all
 Depends: ${misc:Depends}, qdbus-qt5, yakuake,
 Recommends: bash-completion
+Enhances: yakuake
 Description: Open a named yakuake tab and runs a script in it
  A rather simple script to open a new tab in yakuake, set the name of
  the tab, run a script, and close the tab when the script terminates.
