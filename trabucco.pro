@@ -85,4 +85,8 @@ icon.path = $${DESTDIR}/usr/share/icons/hicolor/512x512/apps
 icon.files = extras/trabucco.png
 INSTALLS += icon
 
+appstream.path = $${DESTDIR}/usr/share/metainfo/
+appstream.files = extras/trabucco.metainfo.xml
+INSTALLS += appstream
+
 export(INSTALLS)
