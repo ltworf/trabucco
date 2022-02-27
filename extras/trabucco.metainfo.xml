@@ -5,6 +5,7 @@
     <metadata_license>GPL-3+</metadata_license>
     <name>Trabucco</name>
     <name xml:lang="it">Trabucco</name>
+    <icon type="stock">trabucco</icon>
     <summary>Can launch your 90kg applications for 300m (It's a launcher, like katapult, but better).</summary>
     <description>
         <p>Trabucco means trebuchet in Italian, which is a siege weapon, like a catapult.</p>
