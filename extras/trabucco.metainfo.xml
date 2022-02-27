@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<component type="desktop">
+    <id>org.ltworf.trabucco</id>
+    <project_license>GPL-3.0+</project_license>
+    <metadata_license>GPL-3.0+</metadata_license>
+    <name>Trabucco</name>
+    <name xml:lang="it">Trabucco</name>
+    <summary>Can launch your 90kg applications for 300m (It's a launcher, like katapult, but better).</summary>
+    <description>
+        <p>Trabucco means trebuchet in Italian, which is a siege weapon, like a catapult.</p>
+        <p>When KDE4 was released, katapult was replaced by krunner.</p>
+        <p>Trabucco aims at providing an experience similar to katapult, using modern freedesktop.org standards.</p>
+        <p>It shows only one action per search query, and it is deterministic about it.</p>
+        <p>It is much faster than krunner.</p>
+    </description>
+    <provides>
+        <binary>trabucco</binary>
+    </provides>
+    <launchable type="desktop-id">trabucco.desktop</launchable>
+    <update_contact>tiposchi@tiscali.it</update_contact>
+    <developer_name>Salvo 'LtWorf' Tomaselli</developer_name>
+    <url type="homepage">https://github.com/ltworf/trabucco</url>
+    <url type="bugtracker">https://github.com/ltworf/trabucco/issues</url>
+    <url type="help">https://github.com/ltworf/trabucco</url>
+    <url type="donation"></url>
+
+    <screenshots>
+      <screenshot type="default">
+        <image>https://camo.githubusercontent.com/d7a778d1e0fdbb269e9b0157e243a35438fc1573691dd8128ed29210ef7b3f58/687474703a2f2f692e696d6775722e636f6d2f736831363661532e6a7067</image>
+      </screenshot>
+    </screenshots>
+
+    <categories>
+        <category>Utility</category>
+        <category>Qt</category>
+    </categories>
+
+    <requires><control>keyboard</control></requires>
+
+    <keywords>
+        <keyword>launcher</keyword>
+    </keywords>
+</component>
