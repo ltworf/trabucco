@@ -24,6 +24,8 @@ Description: This is a launcher for people that are nostalgic about katapult
  .
  It shows only one action per search query, and it is very deterministic about
  it.
+ .
+ It is much faster than krunner.
 
 Package: ynew
 Architecture: all
