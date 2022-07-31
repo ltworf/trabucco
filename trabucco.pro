@@ -1,7 +1,7 @@
 TEMPLATE = app
 VERSION = 1.3
 
-QT += qml widgets gui sql network
+QT += widgets sql network qml
 CONFIG += c++11 strict_c++
 
 LIBS        += -lX11
