@@ -1,3 +1,10 @@
+trabucco (1.4-1) UNRELEASED; urgency=medium
+
+  * New upstream release
+  * Port to Qt6
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sun, 31 Jul 2022 18:18:25 +0200
+
 trabucco (1.3-1) unstable; urgency=low
 
   * New upstream release
