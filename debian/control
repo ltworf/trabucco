@@ -4,9 +4,9 @@ Priority: optional
 Maintainer: Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>
 Build-Depends:
  debhelper-compat (= 13),
- qt5-qmake,
- qtbase5-dev,
- qtdeclarative5-dev
+ qmake6,
+ qt6-base-dev,
+ qt6-declarative-dev
 Standards-Version: 4.6.0
 Homepage: https://github.com/ltworf/trabucco#trabucco
 Rules-Requires-Root: no
