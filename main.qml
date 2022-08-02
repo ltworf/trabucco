@@ -14,14 +14,14 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Trabucco.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright (C) 2016  Salvo "LtWorf" Tomaselli
+Copyright (C) 2016-2022  Salvo "LtWorf" Tomaselli
 Copyright (C) 2016 Giuseppe Bilotta
 */
 
-import QtQuick 2.7
+import QtQuick 6.0
 
-import QtQuick.Window 2.2
-import QtQuick.Controls 1.3
+import QtQuick.Window 6.0
+import QtQuick.Controls 6.0
 import Qt.labs.settings 1.0
 
 ApplicationWindow {
@@ -52,7 +52,7 @@ ApplicationWindow {
     }
 
     function startsWith(long_string, header){
-        return long_string.substr(0, header.length) == header
+        return long_string.substr(0, header.length) === header
     }
 
     SystemPalette { id: activePalette; colorGroup: SystemPalette.Active }
