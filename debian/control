@@ -7,7 +7,7 @@ Build-Depends:
  qmake6,
  qt6-base-dev,
  qt6-declarative-dev
-Standards-Version: 4.6.0
+Standards-Version: 4.6.1.0
 Homepage: https://github.com/ltworf/trabucco#trabucco
 Rules-Requires-Root: no
 

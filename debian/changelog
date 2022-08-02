@@ -3,6 +3,7 @@ trabucco (1.4-1) UNRELEASED; urgency=medium
   * New upstream release
   * Port to Qt6
   * Added upstream metadata file
+  * Bump Standards Version to 4.6.1.0
 
  -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sun, 31 Jul 2022 18:18:25 +0200
 
