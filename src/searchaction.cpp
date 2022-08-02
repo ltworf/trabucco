@@ -14,7 +14,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Trabucco.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright (C) 2016  Salvo "LtWorf" Tomaselli
+Copyright (C) 2016-2022 Salvo "LtWorf" Tomaselli
 */
 
 #include "searchaction.h"
@@ -25,6 +25,7 @@ Copyright (C) 2016  Salvo "LtWorf" Tomaselli
 #include <QFileInfo>
 #include <QSettings>
 #include <QUrl>
+#include <QDebug>
 
 #include "cache.h"
 #include "iconfinder.h"
@@ -56,10 +57,9 @@ SearchAction::SearchAction(QString name, QString query, bool hidden, QObject *pa
 QList<SearchAction*> SearchAction::LoadFile(QString file, QObject* parent) {
     QList<SearchAction*> r;
     QSettings settings(file, QSettings::IniFormat);
-    QString charset = settings.value("Desktop Entry/Charset", "").toString();
-    if (charset == "")
-        charset = "UTF-8";
-    settings.setIniCodec(charset.toStdString().c_str());
+    QString charset = settings.value("Desktop Entry/Charset", "utf8").toString();
+    if (charset != "utf8" && charset != "")
+        qDebug() << "Unable to correctly use charset" << charset << "for file" << file;
 
     //Some validation
     {
