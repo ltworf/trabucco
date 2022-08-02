@@ -52,7 +52,7 @@ ApplicationWindow {
     }
 
     function startsWith(long_string, header){
-        return long_string.substr(0, header.length) == header
+        return long_string.substr(0, header.length) === header
     }
 
     SystemPalette { id: activePalette; colorGroup: SystemPalette.Active }
