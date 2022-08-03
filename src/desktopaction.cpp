@@ -14,7 +14,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Trabucco.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright (C) 2016  Salvo "LtWorf" Tomaselli
+Copyright (C) 2016-2022  Salvo "LtWorf" Tomaselli
 Copyright (C) 2016 Giuseppe Bilotta
 */
 
@@ -24,6 +24,7 @@ Copyright (C) 2016 Giuseppe Bilotta
 #include <QProcess>
 #include <QProcessEnvironment>
 #include <QSet>
+#include <QDebug>
 
 #include "desktopaction.h"
 #include "iconfinder.h"
@@ -123,13 +124,24 @@ bool DesktopAction::mustShow() {
 }
 
 void DesktopAction::runAction() {
-    printf("%s\n", this->action.toStdString().c_str());
+    QProcess proc;
+    QStringList args;
     if (!this->terminal) {
-        QProcess::startDetached(this->action);
+        args = proc.splitCommand(this->action);
     } else {
-        QProcess::startDetached("x-terminal-emulator -e " + this->action);
+        args = proc.splitCommand("x-terminal-emulator -e " + this->action);
     }
 
+    if (args.size() == 0) {
+        qDebug() << "Nothing to run for this command";
+        return;
+    } else
+        qDebug() << "Running" << args;
+
+    proc.setProgram(args[0]);
+    args.pop_front();
+    proc.setArguments(args);
+    proc.startDetached();
 }
 
 QString DesktopAction::getIcon() {
