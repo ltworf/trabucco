@@ -14,7 +14,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Trabucco.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright (C) 2017-2021  Salvo "LtWorf" Tomaselli
+Copyright (C) 2017-2022  Salvo "LtWorf" Tomaselli
 */
 
 #include <QDir>
@@ -41,7 +41,10 @@ QString YnewAction::getIcon() {
 void YnewAction::runAction() {
     QStringList arguments;
     arguments << script;
-    QProcess::startDetached("ynew", arguments);
+    QProcess proc;
+    proc.setProgram("ynew");
+    proc.setArguments(arguments);
+    proc.startDetached();
 }
 
 void YnewAction::LoadYnewActions(BTree* tree, QObject* parent) {
