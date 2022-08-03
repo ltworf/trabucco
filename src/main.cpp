@@ -14,7 +14,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Trabucco.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright (C) 2016  Salvo "LtWorf" Tomaselli
+Copyright (C) 2016-2022  Salvo "LtWorf" Tomaselli
 Copyright (C) 2016 Giuseppe Bilotta
 */
 #include <unistd.h>
@@ -97,8 +97,11 @@ int main(int argc, char *argv[]) {
     int r = app.exec();
     if (r == CONFIG_RELOAD) {
         QStringList args;
-        args.append("--wait");
-        QProcess::startDetached(QApplication::applicationFilePath(), args);
+        args << "--wait";
+        QProcess proc;
+        proc.setArguments(args);
+        proc.setProgram(QApplication::applicationFilePath());
+        proc.startDetached();
     }
     return r;
 }
