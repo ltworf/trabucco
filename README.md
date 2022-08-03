@@ -9,7 +9,7 @@ This is a launcher for people that are nostalgic about katapult.
 
 It is licensed under GPLv3.
 
-It uses Qt5.5 and QML.
+It uses Qt6.2 and QML.
 
 Supported actions
 =================
@@ -23,16 +23,18 @@ Right now it can search:
 Build
 =====
 
-Requires Qt5.5 and libx11.
+Requires Qt6.2 and libx11.
 
 
 ```
 mkdir build
 cd build
-qmake ..
-make
+qmake6 ..
+make -j
 ./trabucco
 ```
+
+To compile with debug symbols, add `CONFIG+=debug` after `qmake6`.
 
 Why
 ===
@@ -44,23 +46,14 @@ Trabucco means trebuchet in Italian, which is a siege weapon, like a catapult.
 When KDE4 was released, katapult was replaced by krunner, which has several
 drawbacks.
 
+ * Fuzzy. A certain sequence of letters doesn't always result in the same
+   suggestions.
  * It sometimes crashes.
  * Uses a timeout to show suggestions.
    This means that if the system is under heavy load, no suggestion is shown.
- * Fuzzy. A certain sequence of letters doesn't always result in the same
-   suggestions.
  * Most plugins don't work, or trigger heavy CPU load.
 
 Trabucco aims to solve these problems by showing only one suggestion per
 search string, and being deterministic about it.
 
 I will add plugins for things that I need.
-
-Debug
-=====
-
-To compile with debug symbols,
-```
-qmake CONFIG+=debug ..
-make
-```
