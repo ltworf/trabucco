@@ -2,7 +2,7 @@
 set -ex
 
 # Create archive
-qmake CONFIG+=release .
+qmake6 CONFIG+=release .
 make dist
 make distclean
 
@@ -26,7 +26,6 @@ rm -rf "$TMPDIR"
 
 # Sign the archive
 gpg --sign --armor --detach-sign *.orig.tar.gz
-
 
 
 T=$(mktemp -d)
