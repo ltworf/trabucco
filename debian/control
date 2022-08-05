@@ -30,7 +30,7 @@ Description: This is a launcher for people that are nostalgic about katapult
 
 Package: ynew
 Architecture: all
-Depends: ${misc:Depends}, qdbus-qt5, yakuake,
+Depends: ${misc:Depends}, qdbus-qt5 | qt6-tools-dev-tools, yakuake,
 Recommends: bash-completion
 Enhances: yakuake
 Description: Open a named yakuake tab and runs a script in it
