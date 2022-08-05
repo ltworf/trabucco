@@ -33,6 +33,7 @@ then
 	exit 0
 fi
 
+PATH="/usr/lib/qt6/bin/:$PATH"
 newsession=$(qdbus  org.kde.yakuake /yakuake/sessions org.kde.yakuake.addSession)
 
 qdbus  org.kde.yakuake /yakuake/tabs org.kde.yakuake.setTabTitle $newsession $title
