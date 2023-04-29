@@ -15,7 +15,7 @@ Package: trabucco
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, qml6-module-qtquick-controls, qml6-module-qt-labs-settings, qml6-module-qtquick-window, qml6-module-qtquick-templates
 Recommends: qt6-qpa-plugins
-Suggests: ynew
+Suggests: ynew, pass
 Description: This is a launcher for people that are nostalgic about katapult
  Trabucco means trebuchet in Italian, which is a siege weapon, like a catapult.
  When KDE4 was released, katapult was replaced by krunner.
