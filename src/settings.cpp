@@ -19,6 +19,8 @@ Copyright (C) 2016-2023  Salvo "LtWorf" Tomaselli
 
 #include "settings.h"
 #include "ui_settings.h"
+#include "passaction.h"
+#include "ynewaction.h"
 
 #include <QSettings>
 #include <QComboBox>
@@ -70,6 +72,10 @@ Settings::Settings(QWidget *parent) :
     QString key = settings.value("Shortcut/keycode", "space").toString();
     addModifiers(this->ui->cmbModifier, modifier);
     addKeys(this->ui->cmbKey, key);
+
+    // Disable unusable
+    ui->chkPass->setEnabled(PassAction::isPassInstalled());
+    ui->chkYnew->setEnabled(YnewAction::isYnewInstalled());
 }
 
 void Settings::accept() {
