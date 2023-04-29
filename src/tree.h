@@ -14,7 +14,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Trabucco.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright (C) 2016  Salvo "LtWorf" Tomaselli
+Copyright (C) 2016-2023  Salvo "LtWorf" Tomaselli
 Copyright (C) 2016 Giuseppe Bilotta
 */
 
@@ -44,6 +44,7 @@ private:
     bool desktop;
     bool searchprovider;
     bool ynew;
+    bool pass;
     QObject* action_parent = NULL;
     Action * last = NULL;
     QString last_prefix;
