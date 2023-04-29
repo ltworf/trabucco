@@ -14,42 +14,32 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Trabucco.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright (C) 2016-2023  Salvo "LtWorf" Tomaselli
-Copyright (C) 2016 Giuseppe Bilotta
+Copyright (C) 2023  Salvo "LtWorf" Tomaselli
 */
 
-#ifndef TREE_H
-#define TREE_H
+#ifndef PASSACTION_H
+#define PASSACTION_H
 
-#include <QObject>
 #include <QString>
-#include <QFileSystemWatcher>
+#include <QStringList>
 
-#include "desktopaction.h"
 #include "action.h"
-#include "node.h"
+#include "btree.h"
 
-class Tree : public QObject {
-    Q_OBJECT
+class PassAction: public Action {
 public:
-    explicit Tree(QObject *parent = 0);
-
+    PassAction(QString script, QString prefix, QObject * parent=NULL);
+    static void LoadPassActions(BTree*, QObject* parent=NULL);
+    static QStringList* GetPaths();
+    static bool isPassInstalled();
 public slots:
-    Action * search(QString prefix);
-    void runAction();
-    void rescan();
+    virtual void runAction();
+    virtual QString getIcon();
+//    bool mustShow();
 private:
-    bool ready = false;
-    bool bookmarks;
-    bool desktop;
-    bool searchprovider;
-    bool ynew;
-    bool pass;
-    QObject* action_parent = NULL;
-    Action * last = NULL;
-    QString last_prefix;
-    Node * node = NULL;
-    QFileSystemWatcher watcher;
+    QString script;
+    QString cached_icon_path;
+    static void scanAndLoad(BTree* tree, QObject* parent, QString base, QString icon, QStringList prefixes, unsigned int lchop);
 };
 
-#endif // TREE_H
+#endif // PASSACTION_H

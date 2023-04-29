@@ -60,6 +60,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="chkPass">
+         <property name="text">
+          <string>pass (Password manager)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

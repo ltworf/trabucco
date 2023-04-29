@@ -25,6 +25,7 @@ HEADERS += \
     src/cache.h \
     src/downloader.h \
     src/searchaction.h \
+    src/passaction.h \
     src/clipboard.h \
     src/ynewaction.h
 
@@ -44,6 +45,7 @@ SOURCES += \
     src/cache.cpp \
     src/downloader.cpp \
     src/searchaction.cpp \
+    src/passaction.cpp \
     src/clipboard.cpp \
     src/ynewaction.cpp
 

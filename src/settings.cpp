@@ -14,11 +14,13 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Trabucco.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright (C) 2016  Salvo "LtWorf" Tomaselli
+Copyright (C) 2016-2023  Salvo "LtWorf" Tomaselli
 */
 
 #include "settings.h"
 #include "ui_settings.h"
+#include "passaction.h"
+#include "ynewaction.h"
 
 #include <QSettings>
 #include <QComboBox>
@@ -62,6 +64,7 @@ Settings::Settings(QWidget *parent) :
     ui->chkDesktop->setChecked(settings.value("Source/Desktop", true).toBool());
     ui->chkSearch->setChecked(settings.value("Source/SearchProvider", true).toBool());
     ui->chkYnew->setChecked(settings.value("Source/YnewProvider", true).toBool());
+    ui->chkPass->setChecked(settings.value("Source/pass", true).toBool());
     ui->spnDuration->setValue(settings.value("duration", 250).toInt());
     ui->spnOpacity->setValue(settings.value("opacity", 0.8).toDouble());
 
@@ -69,6 +72,10 @@ Settings::Settings(QWidget *parent) :
     QString key = settings.value("Shortcut/keycode", "space").toString();
     addModifiers(this->ui->cmbModifier, modifier);
     addKeys(this->ui->cmbKey, key);
+
+    // Disable unusable
+    ui->chkPass->setEnabled(PassAction::isPassInstalled());
+    ui->chkYnew->setEnabled(YnewAction::isYnewInstalled());
 }
 
 void Settings::accept() {
@@ -77,6 +84,7 @@ void Settings::accept() {
     settings.setValue("Source/Desktop", this->ui->chkDesktop->isChecked());
     settings.setValue("Source/SearchProvider", this->ui->chkSearch->isChecked());
     settings.setValue("Source/YnewProvider", this->ui->chkYnew->isChecked());
+    settings.setValue("Source/pass", this->ui->chkPass->isChecked());
 
     settings.setValue("Shortcut/modifier", this->ui->cmbModifier->currentData());
     settings.setValue("Shortcut/keycode", this->ui->cmbKey->currentData());
