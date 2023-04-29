@@ -85,7 +85,7 @@ void PassAction::LoadPassActions(BTree* tree, QObject* parent) {
     QSettings settings;
     separator = settings.value("PassAction/separator", " ").toString();
 
-    QString icon = IconFinder::FindIcon("copy");
+    QString icon = IconFinder::FindIcon("password-copy");
     QStringList prefixes = settings.value("PassAction/prefixes", "pass").toStringList();
 
     PassAction::scanAndLoad(tree, parent, dir, icon, prefixes, dir.size());
