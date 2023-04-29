@@ -1,6 +1,7 @@
 1.4
 * Port to Qt6
 * Remove support for pre-Blink Opera bookmarks
+* Add actions for pass
 
 1.3
 * Install appstream metadata
