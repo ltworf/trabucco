@@ -18,10 +18,10 @@ Copyright (C) 2016-2022  Salvo "LtWorf" Tomaselli
 Copyright (C) 2016 Giuseppe Bilotta
 */
 
-import QtQuick 6.0
+import QtQuick 6.4
 
-import QtQuick.Window 6.0
-import QtQuick.Controls 6.0
+import QtQuick.Window 6.4
+import QtQuick.Controls 6.4
 import Qt.labs.settings 1.0
 
 ApplicationWindow {
