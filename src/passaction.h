@@ -39,7 +39,7 @@ public slots:
 private:
     QString script;
     QString cached_icon_path;
-    static void scanAndLoad(BTree* tree, QObject* parent, QString base, QString icon, QStringList prefixes);
+    static void scanAndLoad(BTree* tree, QObject* parent, QString base, QString icon, QStringList prefixes, unsigned int lchop);
 };
 
 #endif // PASSACTION_H

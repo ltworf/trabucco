@@ -49,7 +49,7 @@ void PassAction::runAction() {
 
 #include <QDebug>
 
-void PassAction::scanAndLoad(BTree* tree, QObject* parent, QString base, QString icon, QStringList prefixes) {
+void PassAction::scanAndLoad(BTree* tree, QObject* parent, QString base, QString icon, QStringList prefixes, unsigned int lchop) {
     QDirIterator i(base, QDirIterator::FollowSymlinks);
     while (i.hasNext()) {
         QFileInfo file(i.next());
@@ -57,17 +57,22 @@ void PassAction::scanAndLoad(BTree* tree, QObject* parent, QString base, QString
         if (file.fileName().startsWith("."))
             continue;
         if (file.isDir() && file.isExecutable()) {
-            PassAction::scanAndLoad(tree, parent, file.absoluteFilePath(), icon, prefixes);
+            PassAction::scanAndLoad(tree, parent, file.absoluteFilePath(), icon, prefixes, lchop);
         }
         if (!file.fileName().endsWith(".gpg"))
             continue;
 
         for (int i = 0; i < prefixes.size(); i++) {
-            PassAction* pass_action = new PassAction(file.fileName(), prefixes.at(i), parent);
+            QString name = file.absoluteFilePath();
+            // Remove extension
+            name.chop(4);
+            // Remove initial path
+            name.remove(0, lchop);
+
+            qDebug() << "[pass] adding " << prefixes.at(i) << name << base;
+            PassAction* pass_action = new PassAction(name, prefixes.at(i), parent);
             pass_action->cached_icon_path = icon;
             tree->add(pass_action);
-
-            qDebug() << "[pass] adding " << file.fileName() << prefixes.at(i);
         }
     }
 }
@@ -82,10 +87,10 @@ void PassAction::LoadPassActions(BTree* tree, QObject* parent) {
     QSettings settings;
     separator = settings.value("PassAction/separator", " ").toString();
 
-    QString icon = IconFinder::FindIcon("yakuake");
+    QString icon = IconFinder::FindIcon("copy");
     QStringList prefixes = settings.value("PassAction/prefixes", "pass").toStringList();
 
-    PassAction::scanAndLoad(tree, parent, dir, icon, prefixes);
+    PassAction::scanAndLoad(tree, parent, dir, icon, prefixes, dir.size());
 }
 
 
