@@ -40,14 +40,13 @@ QString PassAction::getIcon() {
 
 void PassAction::runAction() {
     QStringList arguments;
+    arguments << "-c";
     arguments << script;
     QProcess proc;
     proc.setProgram("pass");
     proc.setArguments(arguments);
     proc.startDetached();
 }
-
-#include <QDebug>
 
 void PassAction::scanAndLoad(BTree* tree, QObject* parent, QString base, QString icon, QStringList prefixes, unsigned int lchop) {
     QDirIterator i(base, QDirIterator::FollowSymlinks);
@@ -69,7 +68,6 @@ void PassAction::scanAndLoad(BTree* tree, QObject* parent, QString base, QString
             // Remove initial path
             name.remove(0, lchop);
 
-            qDebug() << "[pass] adding " << prefixes.at(i) << name << base;
             PassAction* pass_action = new PassAction(name, prefixes.at(i), parent);
             pass_action->cached_icon_path = icon;
             tree->add(pass_action);
@@ -92,7 +90,6 @@ void PassAction::LoadPassActions(BTree* tree, QObject* parent) {
 
     PassAction::scanAndLoad(tree, parent, dir, icon, prefixes, dir.size());
 }
-
 
 QStringList* PassAction::GetPaths() {
     static QStringList* result = NULL;
