@@ -23,7 +23,7 @@ Right now it can search:
 Build
 =====
 
-Requires Qt6.2 and libx11.
+Requires Qt6.4 and libx11.
 
 
 ```
@@ -57,3 +57,10 @@ Trabucco aims to solve these problems by showing only one suggestion per
 search string, and being deterministic about it.
 
 I will add plugins for things that I need.
+
+Contributing
+============
+
+Feel free to send patches to tiposchi@tiscali.it or to open github pull requests.
+
+[Donate to LtWorf](https://liberapay.com/ltworf/donate)
