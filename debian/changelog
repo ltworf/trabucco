@@ -1,4 +1,4 @@
-trabucco (1.4-1) UNRELEASED; urgency=medium
+trabucco (1.4-1) unstable; urgency=low
 
   * New upstream release
   * Port to Qt6
