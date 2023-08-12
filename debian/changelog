@@ -1,8 +1,8 @@
-trabucco (1.5-1) UNRELEASED; urgency=medium
+trabucco (1.4-2) unstable; urgency=high
 
-  * New upstream release
+  * Add missing dependencies
 
- -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sun, 04 Jun 2023 22:13:54 +0200
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sat, 12 Aug 2023 09:41:49 +0200
 
 trabucco (1.4-1) unstable; urgency=low
 
