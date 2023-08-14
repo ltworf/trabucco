@@ -1,6 +1,7 @@
 trabucco (1.4-2) unstable; urgency=high
 
   * Add missing dependencies
+  * Recommend libqt6svg6, needed to properly render svg icons
 
  -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sat, 12 Aug 2023 09:41:49 +0200
 
