@@ -1,3 +1,9 @@
+trabucco (1.4-3) unstable; urgency=low
+
+  * Make d/rules remove symlink created by itself (Closes: #1049641, #1047088)
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sat, 16 Sep 2023 07:33:29 +0200
+
 trabucco (1.4-2) unstable; urgency=high
 
   * Add missing dependencies
